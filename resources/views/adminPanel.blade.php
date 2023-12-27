@@ -1,0 +1,3 @@
+@auth
+    @include('admindashboard')
+@endauth
