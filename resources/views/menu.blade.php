@@ -4,7 +4,7 @@
     <div class="content mt-16" style="margin-left:20%; height:1000px;">
         <h1 class="emp-text">Menu</h1>
         <div class="add-employee">
-            <button><a href="{{route('addMenu')}}">Create Menu</a></button>
+            <a href="{{route('addMenu')}}"><button>Create Menu</button></a>
         </div>
         <table class="table">
             <thead>
@@ -15,7 +15,7 @@
                     <th>Price</th>
                     <th>Description</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <th colspan="2" style="text-align: center;">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,16 @@
                         <td>{{ $menuItem->price }}</td>
                         <td>{{ $menuItem->description }}</td>
                         <td></td>
-                        <td></td>
+                        <td><a href="{{ route('editMenu', $menuItem->id) }}">Edit</a></td>
+                        <td>
+                            <form action="{{ route('deleteMenu', ['id' => $menuItem->id]) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                            </form>
+                        </td>
+
+
                     </tr>
                 @endforeach
             </tbody>
