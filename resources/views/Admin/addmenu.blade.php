@@ -1,33 +1,42 @@
 <div class="flex">
-    @include('admindashboard')
+    @include('admin/admindashboard')
     
     <div class="content mt-16" style="margin-left:20%; height:1000px;">
-        <h1 class="emp-text">Edit Menu</h1>
-        <form action="{{ route('updateMenu', $menuItem->id) }}" method="post" enctype="multipart/form-data">
+        
+        <h1 class="emp-text">Add Menu</h1>
+        <form action="{{ route('menu.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PUT') <!-- Use the PUT method for updating -->
-
             <div class="form-group">
                 <label for="name">Item Name:</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ $menuItem->name }}" required>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Item Category:</label>
+                <select name="category_id" id="category" class="form-control">
+                    <option value="" disabled selected>-- Select category --</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->category }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="price">Item Price:</label>
-                <input type="number" id="price" name="price" class="form-control" value="{{ $menuItem->price }}" required>
+                <input type="number" id="price" name="price" class="form-control" required>
             </div>
 
             <div class="form-group">
                 <label for="description">Item Description:</label>
-                <input type="text" id="description" name="description" class="form-control" value="{{ $menuItem->description }}" required>
+                <input type="text" id="description" name="description" class="form-control" required>
             </div>
 
             <div class="form-group">
                 <label for="image">Item Image:</label>
-                <input type="file" id="image" name="image" class="form-control" accept="image/*">
+                <input type="file" id="image" name="image" class="form-control" accept="image/*" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Item</button>
+            <button type="submit" class="btn btn-primary">Add Item</button>
         </form>
     </div>
 </div>
@@ -73,7 +82,7 @@
         margin-top: 2%;
     }
 
-    input{
+    input, select{
         width: 100%;
         margin-bottom:2%;
     }

@@ -8,6 +8,6 @@ class adminPanelController extends Controller
 {
     //
     public function index(){
-        return view('adminPanel');
+        return view('admin.adminPanel');
     }
 }

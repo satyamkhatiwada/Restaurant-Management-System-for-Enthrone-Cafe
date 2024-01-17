@@ -5,12 +5,13 @@
     </div>
 
     <li class="mt-5 mb-2">
-        <a href="{{ route('adminPanel') }}" class="{{ request()->routeIs('adminPanel') ? 'active' : '' }}" id="panel-link">
+        <a href="{{ route('adminPanel') }}" class="{{ request()->routeIs(['admindashboard', 'adminPanel']) ? 'active' : '' }}" id="panel-link">
             Panel
         </a>
     </li>
+
     <li class="mb-2">
-        <a href="{{ route('menu') }}" class="{{ request()->routeIs('menu') ? 'active' : '' }}" id="menu-link">
+        <a href="{{ route('admin.menu') }}" class="{{ request()->routeIs('admin.menu') ? 'active' : '' }}" id="menu-link">
             Menu
         </a>
     </li>

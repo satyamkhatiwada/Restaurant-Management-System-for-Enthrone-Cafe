@@ -8,6 +8,6 @@ class WaiterController extends Controller
 {
     //
     public function index(){
-        return view('waiter');
+        return view('admin.waiter');
     }
 }

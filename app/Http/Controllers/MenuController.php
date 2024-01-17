@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\MenuItem;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,46 +12,51 @@ class MenuController extends Controller
     //
     public function index(){
         $menuItems = MenuItem::all();
-
-        return view('menu', compact('menuItems'));
+        return view('admin.menu', compact('menuItems'));
     }
 
     public function addMenu(){
-        return view('addmenu');
+        $categories = Category::all();
+        return view('admin.addmenu', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric',
             'description' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        ]);        
 
-        $imagePath = $request->file('image')->store('images', 'public');
+    $imagePath = $request->file('image')->store('menu_images', 'public');
 
-        MenuItem::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'description' => $request->description,
-            'image' => $imagePath,
-        ]);
+    $menuItem = MenuItem::create([
+        'name' => $request->name,
+        'category_id' => $request->category_id,
+        'price' => $request->price,
+        'description' => $request->description,
+        'image' => $imagePath,
+    ]);
 
-        return redirect()->route('menu')->with('success', 'Menu item added successfully!');
+    return redirect()->route('admin.menu')->with('success', 'Menu item added successfully!');
     }
+
 
     public function editMenu($id){
         $menuItem = MenuItem::find($id);
-        return view('editmenu', ['menuItem' => $menuItem]);
+        $categories = Category::all();
+        return view('admin.editmenu', ['menuItem' => $menuItem, 'categories' => $categories]);
     }
-
+    
     public function updateMenu(Request $request, $id){
         $menuItem = MenuItem::find($id);
 
         // Validate and update the menu item
         $request->validate([
             'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric',
             'description' => 'required|string|max:255',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -58,6 +64,7 @@ class MenuController extends Controller
 
         $menuItem->update([
             'name' => $request->input('name'),
+            'category_id' => $request->input('category_id'),
             'price' => $request->input('price'),
             'description' => $request->input('description'),
         ]);
@@ -69,7 +76,7 @@ class MenuController extends Controller
             $menuItem->update(['image' => $imagePath]);
         }
 
-        return redirect()->route('menu')->with('success', 'Menu item updated successfully');
+        return redirect()->route('admin.menu')->with('success', 'Menu item updated successfully');
     }
 
     public function deleteMenu($id){
@@ -77,7 +84,7 @@ class MenuController extends Controller
         $menuItem = MenuItem::find($id);
 
         if (!$menuItem) {
-            return redirect()->route('menu')->with('error', 'Menu item not found.');
+            return redirect()->route('admin.menu')->with('error', 'Menu item not found.');
         }
 
         // Delete the image from storage
@@ -86,7 +93,9 @@ class MenuController extends Controller
         // Delete the menu item from the database
         $menuItem->delete();
 
-        return redirect()->route('menu')->with('success', 'Menu item deleted successfully');
+        return redirect()->route('admin.menu')->with('success', 'Menu item deleted successfully');
     }
+
+    
 
 }
