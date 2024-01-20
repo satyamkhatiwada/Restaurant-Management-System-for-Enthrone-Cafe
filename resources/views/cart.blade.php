@@ -22,6 +22,8 @@
                         @php
                             $sn = 1; // Initialize the serial number
                             $subtotal = 0; 
+                            $tax = 0;
+                            $delivery = 100;
                         @endphp
                         @foreach($cartItems as $cartItem)
                             <tr>
@@ -64,6 +66,17 @@
             </div>
             <div class="w-40">
                 <h1 class="Summary-text">Summary:</h1>
+                <div class="summary-section">
+                <p><span class="summary-label">Subtotal:</span> <span class="summary-value">{{ $subtotal }}</span></p>
+                <p><span class="summary-label">Estimated Tax:</span> <span class="summary-value">{{ $tax }}</span></p>
+                <p><span class="summary-label">Delivery Charge:</span> <span class="summary-value">{{ $delivery }}</span></p>
+                <hr>
+                <p><span class="summary-label">Total:</span> <span class="summary-value">{{ $subtotal+ $tax + $delivery }}</span></p>
+                <form action="" method="POST">
+                    @csrf
+                    <button type="submit" class="checkout-button">Checkout</button>
+                </form>
+            </div>
             </div>   
         </div>
     </div>
@@ -132,6 +145,39 @@
     .Summary-text{
         font-weight:bold;
         text-align: left;
+    }
+
+    .summary-section {
+        text-align: left;
+    }
+
+    .summary-label {
+        display: inline-block;
+        width: 120px; /* Adjust the width as needed */
+    }
+
+    .summary-value {
+        display: inline-block;
+        text-align: right;
+        width: calc(100% - 120px); /* Adjust the width as needed */
+    }
+
+    .checkout-button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        width:100%;
+        cursor: pointer;
+    }
+
+    .checkout-button:hover {
+        background-color: #45a049;
     }
 
 </style>
