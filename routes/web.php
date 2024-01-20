@@ -10,8 +10,6 @@ use App\Http\Controllers\UserMenuController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
-
-
  
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +29,6 @@ Route::get('/', function () {
 
 Route::get('/menu', [UserMenuController::class, 'index'])->name('menu'); 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
 Route::group(['prefix'=>'admin','middleware'=>['admin:admin']],function(){
     Route::get('/login', [AdminController::class, 'loginForm']);
@@ -51,6 +48,13 @@ Route::middleware([
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.admindashboard');
 })->name('admindashboard');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add/{menuItemId}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::delete('/cart/remove/{cartItemId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::patch('/cart/update/{cartItemId}', [CartController::class, 'updateCart'])->name('cart.update');
+});
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/menu', [MenuController::class, 'index'])->name('admin.menu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/addMenu', [MenuController::class, 'addMenu'])->name('addMenu');

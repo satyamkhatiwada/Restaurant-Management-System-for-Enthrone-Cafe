@@ -55,7 +55,7 @@
 
                 @if (Auth::user() && !auth('admin')->check())
                     <div class="ms-3 relative">
-                        <a href="{{route('cart')}}" :active="request()->routeIs('cart')"><button class="inline-flex items-center px-4 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150"
+                        <a href="{{route('cart.view')}}" :active="request()->routeIs('cart.view')"><button class="inline-flex items-center px-4 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150"
                                 style="background-image: url('{{ asset('img/cart.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
                         </button></a>
                     </div>

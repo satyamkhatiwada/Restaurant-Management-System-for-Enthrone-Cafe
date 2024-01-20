@@ -28,10 +28,16 @@
                         </div>
                         <img src="{{ asset('storage/' . $menuItem->image) }}" class="card-img-top" alt="{{ $menuItem->name }}">
                         @if(auth()->check())
-                            <!-- Display link to cart for authenticated users -->
-                            <a href="{{ route('cart') }}">
-                                <img src="img/plus.png" class="add-to-cart" alt="">
-                            </a>
+                            <form action="{{ route('cart.add', ['menuItemId' => $menuItem->id]) }}" method="POST">
+                                @csrf
+                                <!-- Your form fields and submit button go here -->
+                                <button type="submit">
+                                    <a href="{{ route('cart.add', ['menuItemId' => $menuItem->id]) }}">
+                                        <img src="img/plus.png" class="add-to-cart" alt="">
+                                    </a>
+                                </button>
+                            </form>
+
                         @else
                             <!-- Display link to login for guest users -->
                             <a href="{{ route('login') }}">
