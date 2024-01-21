@@ -21,7 +21,7 @@
                     <div class="card flex">
                         <div class="card-body">
                             <h5 class="card-title">{{ $menuItem->name }}</h5>
-                            <p class="card-text desc">{{ $menuItem->description }}</p><br><br>
+                            <p class="card-text desc">{{ $menuItem->description }}</p><br>
                             <p class="card-text price">Price: {{ $menuItem->price }}</p>
                             <!-- <a href="#" class="btn">Order Now</a>
                             <a href="#" class="btn">Add to Cart</a> -->
@@ -132,12 +132,11 @@
 
     .desc{
         /* width:60%; */
-        font-size:12px;
+        font-size:10px;
         color:gray;
     }
 
     .price{
-        
         font-size:14px;
         font-weight: bold;
         color: green;

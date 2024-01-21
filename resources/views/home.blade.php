@@ -39,6 +39,8 @@
   </div> 
 </div>
 
+
+
   <!-- Your HTML code -->
 
 <script>
@@ -68,7 +70,7 @@
     // Add active class to the corresponding dot
     dots[slideIndex - 1].classList.add("active");
 
-    setTimeout(showSlides, 5000); // Change image every 5 seconds
+    setTimeout(showSlides, 3000); // Change image every 5 seconds
   }
 </script>
 

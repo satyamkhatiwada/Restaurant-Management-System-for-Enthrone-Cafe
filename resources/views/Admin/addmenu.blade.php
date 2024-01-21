@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 <label for="description">Item Description:</label>
-                <input type="text" id="description" name="description" class="form-control" required>
+                <input type="text" id="description" name="description" class="form-control" max-length="170" required>
             </div>
 
             <div class="form-group">

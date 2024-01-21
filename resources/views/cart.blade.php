@@ -4,6 +4,7 @@
 
     <div class="content mt-16">
         <h1 class="emp-text">My Shopping Cart</h1>
+        @if(count($cartItems) > 0)
         <div class="flex">
             <div class="w-60">
                 <table class="table">
@@ -65,20 +66,35 @@
                 <h1 class="total">Total: {{ $subtotal }}</h1>
             </div>
             <div class="w-40">
-                <h1 class="Summary-text">Summary:</h1>
-                <div class="summary-section">
-                <p><span class="summary-label">Subtotal:</span> <span class="summary-value">{{ $subtotal }}</span></p>
-                <p><span class="summary-label">Estimated Tax:</span> <span class="summary-value">{{ $tax }}</span></p>
-                <p><span class="summary-label">Delivery Charge:</span> <span class="summary-value">{{ $delivery }}</span></p>
-                <hr>
-                <p><span class="summary-label">Total:</span> <span class="summary-value">{{ $subtotal+ $tax + $delivery }}</span></p>
-                <form action="" method="POST">
-                    @csrf
-                    <button type="submit" class="checkout-button">Checkout</button>
-                </form>
-            </div>
+                <h1 class="Summary-text">Order Summary:</h1>
+                <table class="summary-section">
+                    <tr>
+                        <th class="summary-label">Sub-total:</th>
+                        <td class="summary-value">{{ $subtotal }}</td>
+                    </tr>
+                    <tr>
+                        <th class="summary-label">Estimated Tax:</th>
+                        <td class="summary-value">{{$tax}}</td>
+                    </tr>
+                    <tr>
+                        <th class="summary-label">Delivery Charge:</th>
+                        <td class="summary-value">{{$delivery}}</td>
+                    </tr>
+                </table>
+                <table class="summary-section-total">
+                    <tr>
+                        <th class="summary-label">Estimated Total:</th>
+                        <td class="summary-value">{{ $subtotal+ $tax + $delivery }}</td>
+                    </tr>
+                </table>
+                <a href="{{route('checkout')}}">
+                    <button type="submit" class="checkout-button">Checkout (Rs. {{ $subtotal+ $tax + $delivery }})</button>
+                </a>
             </div>   
         </div>
+        @else
+        <p class="no-items">No Items in the cart</p>
+        @endif
     </div>
 </div>
 @else
@@ -107,13 +123,13 @@
         border-bottom: 1px solid #ddd;
     }
 
-    th, td, td form button, td form {
+    .table th, .table td, .table td form button,.table td form {
         padding: 10px;
         text-align: left;
         margin:0;
     }
 
-    th {
+    .table th {
         background-color: white;
         color: red;
         border-bottom: 1px solid #ddd;
@@ -125,7 +141,7 @@
     }
 
     .total{
-        width:95%;
+        width:90%;
         padding-top:5px;
         text-align: right;
         font-weight: bold;
@@ -145,21 +161,26 @@
     .Summary-text{
         font-weight:bold;
         text-align: left;
+        font-size:18px;
+        padding-bottom: 10px;
     }
 
-    .summary-section {
-        text-align: left;
+    .summary-section, .summary-section-total {
+       width:90%;
+    }
+
+    .summary-section{
+        border-bottom: 1px solid #ddd;
     }
 
     .summary-label {
-        display: inline-block;
-        width: 120px; /* Adjust the width as needed */
+        padding: 10px;
+        text-align:left;
     }
 
     .summary-value {
-        display: inline-block;
+        padding:10px;
         text-align: right;
-        width: calc(100% - 120px); /* Adjust the width as needed */
     }
 
     .checkout-button {
@@ -171,13 +192,21 @@
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
-        margin: 4px 2px;
-        width:100%;
+        margin: 10px 2px;
+        width:90%;
         cursor: pointer;
     }
 
     .checkout-button:hover {
         background-color: #45a049;
+    }
+
+    .no-items{
+        width: 100%;
+        text-align: center;
+        padding-top: 10%;
+        font-size: 30px;
+        color: lightgray;
     }
 
 </style>

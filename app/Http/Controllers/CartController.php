@@ -65,5 +65,23 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Cart updated successfully.');
     }
 
+    public function checkout(Request $request)
+    {
+        $user = auth()->user();
+        $cartItems = $user->cartItems()->with('menuItem')->get();
+        $tax=0;
+        $delivery=100;
+    
+        // Calculate subtotal
+        $subtotal = $cartItems->sum(function ($cartItem) {
+            return $cartItem->menuItem->price * $cartItem->quantity;
+        });
 
+        $total_amount = $subtotal+$tax+$delivery;
+    
+        // You can add more logic to calculate tax, delivery charge, etc.
+    
+        return view('order', compact('cartItems', 'total_amount', 'tax', 'delivery'));
+    }
+    
 }

@@ -10,6 +10,8 @@ use App\Http\Controllers\UserMenuController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+
  
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +56,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
     Route::delete('/cart/remove/{cartItemId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
     Route::patch('/cart/update/{cartItemId}', [CartController::class, 'updateCart'])->name('cart.update');
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/orders/create', [OrderController::class, 'createOrder'])->name('order.create');
 });
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/menu', [MenuController::class, 'index'])->name('admin.menu');
