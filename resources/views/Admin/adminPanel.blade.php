@@ -1,8 +1,15 @@
+<!-- adminpanel.blade.php -->
+
 <div class="flex">
     @include('admin/admindashboard')
-    
+
     <div class="content mt-16" style="margin-left:20%; height:1000px;">
         <h1 class="emp-text">Admin Panel</h1>
+
+        <div>
+            <h2>Total Orders: {{ $totalOrders }}</h2>
+            <h2>Total Earnings: ${{ $totalEarnings }}</h2>
+        </div>
     </div>
 </div>
 

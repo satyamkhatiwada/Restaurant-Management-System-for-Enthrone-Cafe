@@ -21,7 +21,7 @@
         </a>
     </li>
     <li class="mb-2">
-        <a href="#" class="{{ request()->routeIs('order') ? 'active' : '' }}" id="inventory-link">
+        <a href="{{ route('admin.order') }}" class="{{ request()->routeIs('admin.order') ? 'active' : '' }}" id="inventory-link">
             Orders
         </a>
     </li>

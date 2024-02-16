@@ -43,8 +43,6 @@
                                 <button type="submit" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
                             </form>
                         </td>
-
-
                     </tr>
                 @endforeach
             </tbody>
@@ -111,6 +109,7 @@
         background-color: #04AA6D;
         color: white;
     }
+
 </style>
 
 

@@ -7,7 +7,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @if (auth('admin')->check())
-                        <x-nav-link href="{{ route('admindashboard') }}" :active="request()->routeIs('admindashboard')">
+                        <x-nav-link href="{{ route('adminPanel') }}" :active="request()->routeIs(['admindashboard', 'adminPanel'])">
                             Dashboard
                         </x-nav-link>
                     @else

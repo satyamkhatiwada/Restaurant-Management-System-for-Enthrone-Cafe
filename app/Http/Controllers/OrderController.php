@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function index(){
+        $order = Order::all();
+        return view('admin.order', compact('order'));
+    }
+    
     public function createOrder(Request $request){
      
         $totalAmount = $request->input('total_amount');
@@ -34,7 +39,10 @@ class OrderController extends Controller
             'landmark' => $request->input('landmark'),
             'total_amount' => $totalAmount,
             'payment_method' => $request->input('payment_method'),
-        ]);        
+        ]);    
+        
+        $user = Auth::user();
+        $user->cartItems()->delete();
 
         return redirect()->route('home')->with('success', 'Order placed successfully!');
     }

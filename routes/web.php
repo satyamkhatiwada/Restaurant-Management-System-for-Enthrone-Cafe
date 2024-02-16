@@ -75,3 +75,4 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/category', [
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/menu/{id}/edit', [MenuController::class, 'editMenu'])->name('editMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/menu/{id}', [MenuController::class, 'updateMenu'])->name('updateMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/menu/{id}', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/order', [OrderController::class, 'index'])->name('admin.order');
