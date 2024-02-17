@@ -7,6 +7,7 @@
         <div>
             <h2>Total Orders: {{ $totalOrders }}</h2>
             <h2>Total Earnings: ${{ $totalEarnings }}</h2>
+            <h2>Total Users: ${{$totalUsers}}</h2>
         </div>
     </div>
 </div>

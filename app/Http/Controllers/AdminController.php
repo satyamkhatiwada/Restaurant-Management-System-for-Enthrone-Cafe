@@ -21,6 +21,7 @@ use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
 use App\Models\Order;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -120,7 +121,8 @@ class AdminController extends Controller
     public function index(){
         $totalOrders = Order::count();
         $totalEarnings = Order::sum('total_amount');
+        $totalUsers = User::count();
 
-        return view('admin.admindashboard', compact('totalOrders', 'totalEarnings'));
+        return view('admin.admindashboard', compact('totalOrders', 'totalEarnings','totalUsers'));
     }
 }
