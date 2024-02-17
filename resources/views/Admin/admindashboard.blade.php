@@ -1,86 +1,29 @@
-<x-app-layout>
-<ul class="flex flex-col">
-    <div class="font-semibold text-xl text-gray-800 leading-tight">
-        <span class="mt-16 block admin-text">Admin {{ __('Dashboard') }}</span>
+<div class="flex">
+    @include('admin/adminNavbar')
+
+    <div class="content mt-16" style="margin-left:20%; height:1000px;">
+        <h1 class="emp-text">Admin Panel</h1>
+
+        <div>
+            <h2>Total Orders: {{ $totalOrders }}</h2>
+            <h2>Total Earnings: ${{ $totalEarnings }}</h2>
+        </div>
     </div>
-
-    <li class="mt-5 mb-2">
-        <a href="{{ route('adminPanel') }}" class="{{ request()->routeIs(['admindashboard', 'adminPanel']) ? 'active' : '' }}" id="panel-link">
-            Panel
-        </a>
-    </li>
-
-    <li class="mb-2">
-        <a href="{{ route('admin.menu') }}" class="{{ request()->routeIs('admin.menu') ? 'active' : '' }}" id="menu-link">
-            Menu
-        </a>
-    </li>
-    <li class="mb-2">
-        <a href="{{ route('employee') }}" class="{{ request()->routeIs('employee') ? 'active' : '' }}" id="employee-link">
-            Employee
-        </a>
-    </li>
-    <li class="mb-2">
-        <a href="{{ route('admin.order') }}" class="{{ request()->routeIs('admin.order') ? 'active' : '' }}" id="inventory-link">
-            Orders
-        </a>
-    </li>
-    <li class="mb-2">
-        <a href="#" class="{{ request()->routeIs('inventory') ? 'active' : '' }}" id="inventory-link">
-            Inventory
-        </a>
-    </li>
-</ul>
+</div>
 
 <style>
-    body {
-        margin: 0;
+    .flex {
+        display: flex;
     }
 
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        width: 20%;
-        background-color: #F8F8F8;
-        position: fixed;
-        height: 100%;
-        overflow: auto;
+    .content {
+        flex: 1; /* Take up the remaining space */
+        padding: 16px; /* Add padding to the content */
     }
 
-    li a,
-    .admin-text {
-        display: block;
-        color: #000;
-        padding: 8px 16px;
-        text-decoration: none;
+    .emp-text {
+        font-size: 25px;
+        color: gray;
     }
 
-    li a.active {
-        background-color: #04AA6D;
-        color: white;
-    }
-
-    li a:hover:not(.active) {
-        background-color: #555;
-        color: white;
-    }
 </style>
-
-<script>
-    // Get all links
-    const links = document.querySelectorAll('li a');
-
-    // Add click event listener to each link
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            // Remove active class from all links
-            links.forEach(l => l.classList.remove('active'));
-
-            // Add active class to the clicked link
-            link.classList.add('active');
-        });
-    });
-</script>
-
-</x-app-layout>

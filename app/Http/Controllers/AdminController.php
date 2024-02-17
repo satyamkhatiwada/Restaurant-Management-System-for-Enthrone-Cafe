@@ -20,6 +20,7 @@ use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -114,5 +115,12 @@ class AdminController extends Controller
 
     public function loginForm(){
         return view('auth.login',['guard' => 'admin']);
+    }
+
+    public function index(){
+        $totalOrders = Order::count();
+        $totalEarnings = Order::sum('total_amount');
+
+        return view('admin.admindashboard', compact('totalOrders', 'totalEarnings'));
     }
 }

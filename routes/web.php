@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\adminPanelController;
 use App\Http\Controllers\WaiterController;
 use App\Http\Controllers\UserMenuController;
 use App\Http\Controllers\AboutController;
@@ -47,9 +46,7 @@ Route::middleware([
     })->name('home');
 });
 
-Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
-    return view('admin.admindashboard');
-})->name('admindashboard');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', [AdminController::class, 'index'])->name('admindashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/cart/add/{menuItemId}', [CartController::class, 'addToCart'])->name('cart.add');
@@ -67,7 +64,6 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/menu', [MenuC
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/addMenu', [MenuController::class, 'addMenu'])->name('addMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/addCategory', [CategoryController::class, 'addCategory'])->name('addCategory');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/employee', [EmployeeController::class, 'index'])->name('employee');
-Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/panel', [adminPanelController::class, 'index'])->name('adminPanel');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/employee/addWaiter', [adminPanelController::class, 'index'])->name('waiter');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/addmenu', [MenuController::class, 'addmenu'])->name('addmenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/menu', [MenuController::class, 'store'])->name('menu.store');

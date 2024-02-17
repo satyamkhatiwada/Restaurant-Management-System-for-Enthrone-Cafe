@@ -1,5 +1,5 @@
 <div class="flex">
-    @include('admin/admindashboard')
+    @include('admin/adminNavbar')
 
     <div class="content mt-16" style="margin-left:20%; height:1000px;">
         <h1 class="emp-text">Orders</h1>
