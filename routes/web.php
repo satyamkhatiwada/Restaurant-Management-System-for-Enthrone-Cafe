@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/orders/create', [OrderController::class, 'createOrder'])->name('order.create');
+    Route::post('/esewa/callback', [OrderController::class, 'esewaCallback'])->name('esewa.callback');
 });
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/menu', [MenuController::class, 'index'])->name('admin.menu');
@@ -72,3 +73,4 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/menu/{id}/edi
 Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/menu/{id}', [MenuController::class, 'updateMenu'])->name('updateMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/menu/{id}', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/order', [OrderController::class, 'index'])->name('admin.order');
+

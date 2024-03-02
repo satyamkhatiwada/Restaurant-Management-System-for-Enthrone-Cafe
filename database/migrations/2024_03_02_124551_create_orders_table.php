@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->string('id')->unique()->default(Str::uuid());
+            $table->string('id')->unique()->default('O' . Str::random(5)); 
             $table->foreignId('user_id')->constrained();
             $table->unsignedBigInteger('phone_number')->length(10);
             $table->text('items'); 

@@ -88,12 +88,12 @@
                     <div class="payment-section card">
                         <h1>Choose a payment method</h1>
                         <div class="payment-method">
-                        <button type="submit" class="payment-method-button" id="cashOnDeliveryBtn">
-                            <img src="img/cod.jpg" alt="cash-on-delivery"><span class="cod pay">Cash On Delivery</span>
-                        </button> 
+                            <button type="submit" class="payment-method-button" id="cashOnDeliveryBtn">
+                                <div class="flex"><img src="img/cod.jpg" alt="cash-on-delivery"><span class="cod pay">Cash On Delivery</span></a>
+                            </button> 
 
-                            <button class="payment-method-button">
-                                <a href="" class="flex"><img src="img/esewa.png" alt="esewa"><span class="esewa pay">Pay via esewa</span></a>
+                            <button type="submit" class="payment-method-button" id="esewaBtn">
+                                <div class="flex"><img src="img/esewa.png" alt="esewa"><span class="esewa pay">Pay via esewa</span></a>
                             </button> 
 
                         </div>
@@ -107,31 +107,57 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var cashOnDeliveryBtn = document.getElementById("cashOnDeliveryBtn");
+    var cashOnDeliveryBtn = document.getElementById("cashOnDeliveryBtn");
+    var esewaBtn = document.getElementById("esewaBtn");
 
-        cashOnDeliveryBtn.addEventListener("click", function (event) {
-            event.preventDefault();
+    cashOnDeliveryBtn.addEventListener("click", function (event) {
+        event.preventDefault();
 
-            // Retrieve input field values
-            var phone = document.getElementById("phone").value;
-            var deliveryAddress = document.getElementById("delivery_address").value;
-            var landmark = document.getElementById("landmark").value;
+        // Retrieve input field values
+        var phone = document.getElementById("phone").value;
+        var deliveryAddress = document.getElementById("delivery_address").value;
+        var landmark = document.getElementById("landmark").value;
 
-            // Check if all required fields are filled
-            if (!phone || !deliveryAddress || !landmark) {
-                alert("Please fill all required fields.");
-                return;
-            }
+        // Check if all required fields are filled
+        if (!phone || !deliveryAddress || !landmark) {
+            alert("Please fill all required fields.");
+            return;
+        }
 
-            // Set the payment method value
-            var paymentMethodInput = document.getElementById("payment_method");
-            paymentMethodInput.value = "Cash On Delivery";
+        // Set the payment method value for Cash on Delivery
+        var paymentMethodInput = document.getElementById("payment_method");
+        paymentMethodInput.value = "Cash On Delivery";
 
-            // Submit the form
-            var orderForm = document.getElementById("order-form");
-            orderForm.submit();
+        // Submit the form
+        var orderForm = document.getElementById("order-form");
+        orderForm.submit();
+    });
+
+    esewaBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        // Retrieve input field values
+        var phone = document.getElementById("phone").value;
+        var deliveryAddress = document.getElementById("delivery_address").value;
+        var landmark = document.getElementById("landmark").value;
+
+        // Check if all required fields are filled
+        if (!phone || !deliveryAddress || !landmark) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        // Set the payment method value for eSewa
+        var paymentMethodInput = document.getElementById("payment_method");
+        paymentMethodInput.value = "eSewa";
+
+        // Submit the form
+        var orderForm = document.getElementById("order-form");
+        orderForm.action = "{{ route('esewa.callback') }}"; // Set the action to eSewa callback route
+        orderForm.submit();
         });
     });
+
 </script>
 
 

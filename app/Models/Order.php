@@ -19,22 +19,18 @@ class Order extends Model
         'total_amount',
         'payment_method',
     ];
-    
 
     protected $keyType = 'string';  // Set the key type to string
 
     public $incrementing = false;  // Disable auto-incrementing for the 'id' column
-
-    protected $casts = [
-        'id' => 'string',  // Ensure 'id' is cast as a string
-    ];
 
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($model) {
-            $model->id = Str::uuid();  // Generate a UUID for 'id' during creation
+            // Generate a custom order ID starting with 'O' and containing only six characters
+            $model->id = 'O' . strtoupper(Str::random(5));
         });
     }
 

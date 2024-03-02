@@ -13,7 +13,7 @@
                     <th style="width:11.11%;">Total (inclusive of delivery and tax)</th>
                     <th colspan="2" style="text-align: center;">Delivery Address</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <!-- <th>Actions</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
                 @foreach($order as $order)
                     <tr>
                         <td>{{$sn++}}</td>
-                        <td></td>
+                        <td>{{$order->id}}</td>
                         <td>
                             
                                 @foreach(json_decode($order->items) as $item)
@@ -38,8 +38,14 @@
                         <td>{{ $order->total_amount }}</td>
                         <td>{{ $order->delivery_address }}</td>
                         <td>{{ $order->landmark }}</td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            @if($order->payment_method === 'Cash On Delivery')
+                                Unpaid
+                            @else
+                                Paid 
+                            @endif
+                        </td>
+                        <!-- <td></td> -->
 
                     </tr>
                 @endforeach

@@ -47,4 +47,9 @@ class OrderController extends Controller
         return redirect()->route('home')->with('success', 'Order placed successfully!');
     }
 
+    public function esewaCallback(Request $request)
+    {
+    // Handle eSewa payment callback
+    }
+
 }
