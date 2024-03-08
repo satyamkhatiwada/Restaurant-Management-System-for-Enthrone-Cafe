@@ -22,6 +22,7 @@ use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Waiter;
 
 class AdminController extends Controller
 {
@@ -122,7 +123,8 @@ class AdminController extends Controller
         $totalOrders = Order::count();
         $totalEarnings = Order::sum('total_amount');
         $totalUsers = User::count();
+        $totalEmployee = Waiter::count();
 
-        return view('admin.admindashboard', compact('totalOrders', 'totalEarnings','totalUsers'));
+        return view('admin.admindashboard', compact('totalOrders', 'totalEarnings','totalUsers','totalEmployee'));
     }
 }

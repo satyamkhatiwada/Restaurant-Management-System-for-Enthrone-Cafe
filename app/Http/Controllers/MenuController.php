@@ -28,7 +28,8 @@ class MenuController extends Controller
             'price' => 'required|numeric',
             'description' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);        
+        ]);    
+        // dd($request->file('image'));    
 
     $imagePath = $request->file('image')->store('menu_images', 'public');
 

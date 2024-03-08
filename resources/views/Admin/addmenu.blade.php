@@ -4,7 +4,7 @@
     <div class="content mt-16" style="margin-left:20%; height:1000px;">
         
         <h1 class="emp-text">Add Menu</h1>
-        <form action="{{ route('menu.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="name">Item Name:</label>
