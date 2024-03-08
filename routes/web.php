@@ -9,6 +9,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\WaiterAuthController;
 
  
 /*
@@ -59,6 +60,20 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/orders/create', [OrderController::class, 'createOrder'])->name('order.create');
     Route::post('/esewa/callback', [OrderController::class, 'esewaCallback'])->name('esewa.callback');
 });
+
+Route::group(['prefix' => 'waiter'], function () {
+    Route::get('/login', [WaiterAuthController::class, 'showLoginForm'])->name('waiter.login');
+    Route::post('/login', [WaiterAuthController::class, 'login']);
+    Route::post('/logout', [WaiterAuthController::class, 'logout'])->name('waiter.logout');
+
+    // Define the dashboard route inside the middleware group
+    Route::middleware(['auth:waiter'])->group(function () {
+        Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('waiter.dashboard');
+    });
+});
+
+
+
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/menu', [MenuController::class, 'index'])->name('admin.menu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/addMenu', [MenuController::class, 'addMenu'])->name('addMenu');

@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 use App\Models\Waiter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
-    //
+    public function dashboard()
+    {
+        $waiterData = auth()->guard('waiter')->user(); // Retrieve authenticated waiter data
+        return view('waiter.dashboard', ['waiterData' => $waiterData]);
+    }
+    
     public function index(){
         $waiter = Waiter::all();
         return view('admin.employee', compact('waiter'));
@@ -25,10 +31,13 @@ class EmployeeController extends Controller
             // Add other validation rules as needed
         ]);
 
+        // Hash the password
+        $hashedPassword = Hash::make($request->password);
+
         // Create a new waiter instance
         $waiter = new Waiter();
         $waiter->code = $request->code;
-        $waiter->password = $request->password; // Hash the password
+        $waiter->password = $hashedPassword; // Store the hashed password
         // Add other waiter details here if needed
 
         // Save the waiter to the database
