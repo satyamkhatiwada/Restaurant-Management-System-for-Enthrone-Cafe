@@ -21,10 +21,11 @@ class WaiterAuthController extends Controller
         return redirect()->route('waiter.login')->with('error', 'Invalid credentials');
     }
 
+
     public function logout()
     {
         Auth::guard('waiter')->logout();
-        return redirect('/');
+        return redirect()->route('waiter.login')->with('success', 'Logged out successfully.');
     }
 
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WaiterAuthController;
+use App\Http\Controllers\WaiterOrderController;
 
  
 /*
@@ -69,7 +70,9 @@ Route::group(['prefix' => 'waiter'], function () {
     // Define the dashboard route inside the middleware group
     Route::middleware(['auth:waiter'])->group(function () {
         Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('waiter.dashboard');
-    });
+        Route::get('/order', [WaiterOrderController::class, 'index'])->name('waiter.order');
+
+    });    
 });
 
 

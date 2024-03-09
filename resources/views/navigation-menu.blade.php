@@ -10,21 +10,27 @@
                         <x-nav-link href="{{ route('admindashboard') }}" :active="request()->routeIs('admindashboard')">
                             Dashboard
                         </x-nav-link>
+
+                    @elseif (auth('waiter')->check())
+                        <x-nav-link href="{{ route('waiter.dashboard') }}" :active="request()->routeIs('waiter.dashboard')">
+                            Dashboard
+                        </x-nav-link>
+
+                        <x-nav-link href="{{ route('waiter.order') }}" :active="request()->routeIs('waiter.order')">
+                            Take order
+                        </x-nav-link>
+
                     @else
-                        @if (auth()->check())
+                        @if (auth()->check()&& !auth('waiter')->check())
                             <!-- Display these links for authenticated users -->
                             <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                                 Home
                             </x-nav-link>
-
                         @else
-
                             <x-nav-link href="/" :active="request()->routeIs('home')">
                                 Home
                             </x-nav-link>
-                        
                         @endif
-
                         <x-nav-link href="{{ route('menu') }}" :active="request()->routeIs('menu')">
                             Menu
                         </x-nav-link>
@@ -53,7 +59,7 @@
         
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
-                @if (Auth::user() && !auth('admin')->check())
+                @if (Auth::user() && !auth('admin')->check()&& !auth('waiter')->check())
                     <div class="ms-3 relative">
                         <a href="{{route('cart.view')}}" :active="request()->routeIs('cart.view')"><button class="inline-flex items-center px-4 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150"
                                 style="background-image: url('{{ asset('img/cart.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
@@ -154,15 +160,25 @@
 
                             <div class="border-t border-gray-200"></div>
 
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}" x-data>
-                                @csrf
+                            @if(auth('waiter')->check())
+                                <!-- Waiter Logout Form -->
+                                <form method="POST" action="{{ route('waiter.logout') }}">
+                                    @csrf
+                                    <x-dropdown-link>
+                                        <button type="submit">{{ __('Log Out') }}</button>
+                                    </x-dropdown-link>
+                                </form>
+                            @else
+                                <!-- Default Logout Form -->
+                                <form method="POST" action="{{ route('logout') }}" x-data>
+                                    @csrf
+                                    <x-dropdown-link href="{{ route('logout') }}"
+                                             @click.prevent="$root.submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form>
+                            @endif
 
-                                <x-dropdown-link href="{{ route('logout') }}"
-                                         @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
                         </x-slot>
                     </x-dropdown>
                 </div>
