@@ -162,9 +162,9 @@
 
                             @if(auth('waiter')->check())
                                 <!-- Waiter Logout Form -->
-                                <form method="POST" action="{{ route('waiter.logout') }}">
+                                <form method="POST" action="{{ route('waiter.logout') }}" x-data>
                                     @csrf
-                                    <x-dropdown-link>
+                                    <x-dropdown-link href="{{ route('waiter.logout') }}" @click.prevent="$root.submit();">
                                         <button type="submit">{{ __('Log Out') }}</button>
                                     </x-dropdown-link>
                                 </form>
