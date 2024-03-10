@@ -17,6 +17,7 @@ class Order extends Model
         'delivery_address',
         'landmark',
         'total_amount',
+        'tid',
         'payment_method',
     ];
 

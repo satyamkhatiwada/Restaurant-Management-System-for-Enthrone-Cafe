@@ -12,8 +12,8 @@
                     <th>Phone</th>
                     <th style="width:11.11%;">Total (inclusive of delivery and tax)</th>
                     <th colspan="2" style="text-align: center;">Delivery Address</th>
-                    <th>Status</th>
-                    <!-- <th>Actions</th> -->
+                    <th>Payment Method</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,13 +39,9 @@
                         <td>{{ $order->delivery_address }}</td>
                         <td>{{ $order->landmark }}</td>
                         <td>
-                            @if($order->payment_method === 'Cash On Delivery')
-                                Unpaid
-                            @else
-                                Paid 
-                            @endif
+                            {{($order->payment_method)}}
                         </td>
-                        <!-- <td></td> -->
+                        <td></td>
 
                     </tr>
                 @endforeach

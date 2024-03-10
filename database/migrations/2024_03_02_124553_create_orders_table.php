@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('delivery_address');
             $table->string('landmark');
             $table->decimal('total_amount', 10, 2);
+            $table->string('tid')->nullable();;
             $table->string('payment_method');
             $table->timestamps();
         });

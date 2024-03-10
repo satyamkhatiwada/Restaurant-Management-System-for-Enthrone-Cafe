@@ -153,7 +153,7 @@
 
         // Submit the form
         var orderForm = document.getElementById("order-form");
-        orderForm.action = "https://uat.esewa.com.np/epay/main"; // Set the action to eSewa callback route
+        orderForm.action = "{{route('esewa')}}"; // Set the action to eSewa callback route
         orderForm.submit();
         });
     });

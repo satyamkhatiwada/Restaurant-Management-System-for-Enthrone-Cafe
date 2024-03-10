@@ -58,7 +58,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/orders/create', [OrderController::class, 'createOrder'])->name('order.create');
-    Route::post('/esewa/callback', [OrderController::class, 'esewaCallback'])->name('esewa.callback');
+    Route::post('/esewa', [OrderController::class, 'esewaCallback'])->name('esewa');
+    Route::get('/success', [OrderController::class, 'esewaSuccess']);
+    Route::get('/failure', [OrderController::class, 'esewaFailed']);
+
 });
 
 Route::group(['prefix' => 'waiter'], function () {
