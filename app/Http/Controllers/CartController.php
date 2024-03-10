@@ -4,25 +4,35 @@ namespace App\Http\Controllers;
 use App\Models\CartItem;
 use App\Models\MenuItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class CartController extends Controller
 {
-    public function addToCart(Request $request, $menuItemId)
-    {
-        $user = auth()->user();
+    public function addToCart(Request $request, $menuItemId){
+    $user = auth()->user();
 
-        // Validate that $menuItemId corresponds to an existing menu item
-        $menuItem = MenuItem::findOrFail($menuItemId);
+    // Validate that $menuItemId corresponds to an existing menu item
+    $menuItem = MenuItem::findOrFail($menuItemId);
 
-        $cartItem = CartItem::updateOrCreate(
-            ['user_id' => $user->id, 'menu_item_id' => $menuItemId],
-            ['quantity' => $request->input('quantity', 1)]
-        );
+    $existingCartItem = CartItem::where(['user_id' => $user->id, 'menu_item_id' => $menuItemId])->first();
 
-        // Add any additional logic here
-
-        return redirect()->route('cart.view')->with('success', 'Item added to the cart.');
+    if ($existingCartItem) {
+        // Increment the quantity if the item already exists in the cart
+        $existingCartItem->update([
+            'quantity' => $existingCartItem->quantity + $request->input('quantity', 1)
+        ]);
+    } else {
+        // Add a new item to the cart if it doesn't exist
+        $cartItem = CartItem::create([
+            'user_id' => $user->id,
+            'menu_item_id' => $menuItemId,
+            'quantity' => $request->input('quantity', 1)
+        ]);
     }
+    return redirect()->route('menu')->with('success', 'Item added to the cart successfully.');
+}
+
 
 
 

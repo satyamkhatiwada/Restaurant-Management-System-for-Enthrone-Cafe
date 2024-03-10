@@ -25,6 +25,13 @@
             Orders
         </a>
     </li>
+
+    <li class="mb-2">
+        <a href="#" class="{{ request()->routeIs('admin.booking') ? 'active' : '' }}" id="inventory-link">
+            Table bookings
+        </a>
+    </li>
+
     <li class="mb-2">
         <a href="#" class="{{ request()->routeIs('inventory') ? 'active' : '' }}" id="inventory-link">
             Inventory

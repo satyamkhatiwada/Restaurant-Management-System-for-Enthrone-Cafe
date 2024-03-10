@@ -1,3 +1,5 @@
+
+
 <div class="flex" style="text-decoration: none;"> 
     @if (auth()->check())
         @include('user.dashboard')
@@ -56,6 +58,13 @@
     document.addEventListener("DOMContentLoaded", function () {
         const categoryButtons = document.querySelectorAll('.category-btn');
         const menuItems = document.querySelectorAll('.col-md-4');
+
+        const successMessage = '{{ Session::get('success') }}';
+        if (successMessage) {
+            setTimeout(function() {
+                alert(successMessage);
+            }, 500);
+        }
 
         categoryButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -223,4 +232,6 @@
         border: 1px solid #04AA6D;
         color: black;
     }
+
+
 </style>

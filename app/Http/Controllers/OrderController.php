@@ -101,7 +101,7 @@ class OrderController extends Controller
         }
     }
 
-    public function esewaPayFailed()
+    public function esewaFailed()
     {
         $tid = $_GET['pid'];
         $order = Order::where('tid', $pid)->first();
@@ -111,10 +111,8 @@ class OrderController extends Controller
         ]);
         if ($update_status) {
             //send mail,....
-            //
-            $msg = 'Failed';
-            $msg1 = 'Payment is failed. Contact admin for support.';
-            return view('home', compact('msg', 'msg1'));
+            return redirect()->route('home')->with('error', 'Payment failed!');
+
         }
     }
 

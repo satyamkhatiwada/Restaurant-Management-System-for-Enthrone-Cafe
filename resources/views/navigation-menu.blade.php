@@ -69,13 +69,30 @@
         
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
-                @if (Auth::user() && !auth('admin')->check()&& !auth('waiter')->check())
-                    <div class="ms-3 relative">
-                        <a href="{{route('cart.view')}}" :active="request()->routeIs('cart.view')"><button class="inline-flex items-center px-4 py-3 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150"
-                                style="background-image: url('{{ asset('img/cart.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                        </button></a>
-                    </div>
-                @endif
+            @if (Auth::user() && !auth('admin')->check() && !auth('waiter')->check())
+                <div class="ms-3 relative">
+                    <a href="{{ route('cart.view') }}" :active="request()->routeIs('cart.view')">
+                        <div class="relative" style="background-image: url('{{ asset('img/cart.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 40px; height: 40px;">
+                            <!-- Calculate total quantities -->
+                            @php
+                                $cartItems = Auth::user()->cartItems;
+                                $totalQuantities = $cartItems->sum('quantity');
+                            @endphp
+                            <!-- Display counter badge if total quantities is greater than 0 -->
+                            @if ($totalQuantities > 0)
+                                <span class="absolute top-0 left-full -mt-1 ml-1 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">{{ $totalQuantities }}</span>
+                            @endif
+                        </div>
+                    </a>
+                </div>
+            @endif
+
+
+
+
+
+
+
 
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
