@@ -1,4 +1,4 @@
-<div class="flex" style="text-decoration: none;">
+<div class="" style="text-decoration: none;">
   @if (auth()->check())
     @include('user.dashboard')
   
@@ -10,7 +10,7 @@
   <div class="slideshow-container">
     <div class="mySlides fade">
       <div class="numbertext mt-16">1 / 3</div>
-      <img src="img/food.jpeg" style="width:100%; height: 100vh; object-fit: cover;  filter: brightness(50%);">
+      <img src="img/food.jpeg" style="width:100%; height: 100vh; object-fit: cover;  filter: brightness(30%);">
       <div class="text">There's nothing to think of because we serve<br><span style="color: #FF4500;"> everything you wished for</span></div>
       <div class="content-button">
         <a href="{{ route('menu') }}">
@@ -20,15 +20,25 @@
     </div>
 
     <div class="mySlides fade">
-        <div class="numbertext mt-16">2 / 3</div>
-        <img src="img/burger.jpeg" style="width:100%; height: 100vh; object-fit: cover; filter: brightness(50%);">
-        <div class="text">Caption Two</div>
+      <div class="numbertext mt-16">2 / 3</div>
+      <img src="img/burger.jpeg" style="width:100%; height: 100vh; object-fit: cover; filter: brightness(30%);">
+      <div class="text">There's nothing to think of because we serve<br><span style="color: #FF4500;"> everything you wished for</span></div>
+      <div class="content-button">
+        <a href="{{ route('menu') }}">
+            <button>View our menu</button>
+        </a>
+      </div>
     </div>
 
     <div class="mySlides fade">
-        <div class="numbertext mt-16">3 / 3</div>
-        <img src="img/f.jpeg" style="width:100%; height: 100vh; object-fit: cover; filter: brightness(50%);">
-        <div class="text">Caption Three</div>
+      <div class="numbertext mt-16">3 / 3</div>
+      <img src="img/f.jpeg" style="width:100%; height: 100vh; object-fit: cover; filter: brightness(30%);">
+      <div class="text">There's nothing to think of because we serve<br><span style="color: #FF4500;"> everything you wished for</span></div>
+      <div class="content-button">
+        <a href="{{ route('menu') }}">
+          <button>View our menu</button>
+        </a>
+      </div>
     </div>
 
     <div class="dots" style="text-align: center;">
@@ -37,6 +47,13 @@
       <span class="dot"></span>
     </div>
   </div> 
+  <div id="about-section">
+        @include('about')
+  </div>
+
+  <div id="contact-section">
+    @include('contact')
+  </div>
 </div>
 
 

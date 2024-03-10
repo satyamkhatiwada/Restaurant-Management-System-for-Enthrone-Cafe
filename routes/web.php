@@ -30,7 +30,6 @@ Route::get('/', function () {
 
 
 Route::get('/menu', [UserMenuController::class, 'index'])->name('menu'); 
-Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::group(['prefix'=>'admin','middleware'=>['admin:admin']],function(){
     Route::get('/login', [AdminController::class, 'loginForm']);

@@ -31,12 +31,22 @@
                                 Home
                             </x-nav-link>
                         @endif
+                        <x-nav-link href="#about-section" :active="request()->routeIs('about')">
+                            About
+                        </x-nav-link>
+
+                        <x-nav-link href="#contact-section" :active="request()->routeIs('about')">
+                            Contact
+                        </x-nav-link>
+
                         <x-nav-link href="{{ route('menu') }}" :active="request()->routeIs('menu')">
                             Menu
                         </x-nav-link>
-                        <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">
-                            About
+                
+                        <x-nav-link href="#about-section" :active="request()->routeIs('about')">
+                            Reservation
                         </x-nav-link>
+
                     @endif
                 </div>
 
