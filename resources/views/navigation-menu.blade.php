@@ -26,25 +26,24 @@
                             <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                                 Home
                             </x-nav-link>
+                            <x-nav-link href="{{ route('booking') }}" :active="request()->routeIs('booking')">
+                                Reservation
+                            </x-nav-link>
                         @else
                             <x-nav-link href="/" :active="request()->routeIs('home')">
                                 Home
                             </x-nav-link>
                         @endif
-                        <x-nav-link href="#about-section" :active="request()->routeIs('about')">
-                            About
-                        </x-nav-link>
-
-                        <x-nav-link href="#contact-section" :active="request()->routeIs('about')">
-                            Contact
-                        </x-nav-link>
-
                         <x-nav-link href="{{ route('menu') }}" :active="request()->routeIs('menu')">
                             Menu
                         </x-nav-link>
-                
-                        <x-nav-link href="#about-section" :active="request()->routeIs('about')">
-                            Reservation
+
+                        <x-nav-link href="#" :active="request()->routeIs('about')">
+                            About
+                        </x-nav-link>
+
+                        <x-nav-link href="#" :active="request()->routeIs('contact')">
+                            Contact
                         </x-nav-link>
 
                     @endif

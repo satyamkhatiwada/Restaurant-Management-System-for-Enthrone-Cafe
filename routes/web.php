@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WaiterAuthController;
 use App\Http\Controllers\WaiterOrderController;
+use App\Http\Controllers\BookingController;
 
  
 /*
@@ -64,6 +65,13 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/reservation', [BookingController::class, 'index'])->name('booking');
+    Route::post('/reservation/store', [BookingController::class, 'storeBooking'])->name('bookings.store');
+
+
+});
+
 Route::group(['prefix' => 'waiter'], function () {
     Route::get('/login', [WaiterAuthController::class, 'showLoginForm'])->name('waiter.login');
     Route::post('/login', [WaiterAuthController::class, 'login']);
@@ -94,4 +102,16 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/menu/{id}/edi
 Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/menu/{id}', [MenuController::class, 'updateMenu'])->name('updateMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/menu/{id}', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/order', [OrderController::class, 'index'])->name('admin.order');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/table', [BookingController::class, 'viewTable'])->name('admin.table');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/timeslot', [BookingController::class, 'viewTimeslot'])->name('admin.timeslot');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/bookings', [BookingController::class, 'viewBooking'])->name('admin.booking');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/addtable', [BookingController::class, 'addTable'])->name('addTable');
+Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/tables', [BookingController::class, 'storeTable'])->name('storeTable');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/addtimeslot', [BookingController::class, 'addTimeslot'])->name('addTimeslot');
+Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/timeslots', [BookingController::class, 'storeTimeslot'])->name('storeTimeslot');
+Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/timeslot/{id}', [BookingController::class, 'deleteTimeslot'])->name('deleteTimeslot');
+Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/table/{id}', [BookingController::class, 'deleteTable'])->name('deleteTable');
+
+
+
 

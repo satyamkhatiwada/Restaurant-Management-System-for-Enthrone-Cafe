@@ -2,6 +2,7 @@
     @include('admin/adminNavbar')
     
     <div class="content mt-16" style="margin-left:20%; height:1000px;">
+        <a href="" class="flex"><img src="{{asset('img/back.png')}}" alt="back-img" class="w-4 h-4"> Go back to menu</a>
         <h1 class="emp-text">Edit Menu</h1>
         <form action="{{ route('updateMenu', $menuItem->id) }}" method="post" enctype="multipart/form-data">
             @csrf

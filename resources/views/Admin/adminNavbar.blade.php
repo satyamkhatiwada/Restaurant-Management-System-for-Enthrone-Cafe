@@ -21,13 +21,13 @@
         </a>
     </li>
     <li class="mb-2">
-        <a href="{{ route('admin.order') }}" class="{{ request()->routeIs('admin.order') ? 'active' : '' }}" id="inventory-link">
+        <a href="{{ route('admin.order') }}" class="{{ request()->routeIs('admin.order') ? 'active' : '' }}" id="order-link">
             Orders
         </a>
     </li>
 
     <li class="mb-2">
-        <a href="#" class="{{ request()->routeIs('admin.booking') ? 'active' : '' }}" id="inventory-link">
+        <a href="{{ route('admin.booking') }}" class="{{ request()->routeIs('admin.booking') ? 'active' : '' }}" id="booking-link">
             Table bookings
         </a>
     </li>
