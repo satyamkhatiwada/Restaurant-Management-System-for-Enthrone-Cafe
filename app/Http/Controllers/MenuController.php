@@ -11,7 +11,7 @@ class MenuController extends Controller
 {
     //
     public function index(){
-        $menuItems = MenuItem::all();
+        $menuItems = MenuItem::paginate(8);
         return view('admin.menu', compact('menuItems'));
     }
 
@@ -43,6 +43,21 @@ class MenuController extends Controller
 
     return redirect()->route('admin.menu')->with('success', 'Menu item added successfully!');
     }
+
+    public function updateStatus(Request $request, $id){
+        $menuItem = MenuItem::findOrFail($id);
+
+        if (!$menuItem) {
+            return redirect()->back()->with('error', 'Menu item not found.');
+        }
+
+        $status = $request->input('status');
+        $menuItem->status = $status;
+        $menuItem->save();
+
+        return redirect()->back()->with('success', 'Status updated successfully.');
+    }
+
 
 
     public function editMenu($id){

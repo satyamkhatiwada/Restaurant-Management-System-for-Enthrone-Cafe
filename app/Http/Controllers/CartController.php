@@ -33,9 +33,6 @@ class CartController extends Controller
     return redirect()->route('menu')->with('success', 'Item added to the cart successfully.');
 }
 
-
-
-
     public function viewCart()
     {
         $user = auth()->user();

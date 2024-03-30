@@ -4,7 +4,7 @@
     <div class="content mt-16" style="margin-left:20%; height:1000px;">
         <h1 class="emp-text">Employee</h1>
         <div class="add-employee">
-            <button><a href="{{route('addWaiter')}}">Create Waiter</a></button>
+            <a href="{{route('addWaiter')}}"><button>Create Waiter</button></a>
         </div>
         <table class="table">
             <thead>
@@ -15,22 +15,40 @@
                 </tr>
             </thead>
             <tbody>
+
                 @php
-                    $sn = 1; // Initialize the serial number
+
+                    $sn = $waiters->firstItem();
+
                 @endphp
-                @foreach($waiter as $waiter)
+
+                @foreach($waiters as $waiter)
+
                     <tr>
+
                         <td>{{$sn++}}</td>
+
                         <td>{{$waiter->code}}</td>
-                        <td><div class="password-container">
+
+                        <td>
+                            <div class="password-container">
                                 <input type="password" value="{{$waiter->password}}" class="password-field" readonly>
                                 <img src="{{ asset('img/eye.png') }}" class="toggle-password" alt="Show/Hide Password">
                             </div>
                         </td>
+
                     </tr>
+
                 @endforeach
+
             </tbody>
+
         </table>
+
+        <br>
+
+        {{ $waiters->links() }}
+
     </div>
 </div>
 
@@ -56,21 +74,17 @@
 
     .add-employee button {
         width:20%;
-        background-color: #04AA6D;
+        background-color: #7978E9;
+        border: 1px solid #7978E9;
         padding: 10px;
         border-radius: 10px;
         color: white;
-        cursor: pointer; /* Add a pointer cursor on hover */
+        cursor: pointer; 
     }
 
     .add-employee button:hover {
-        width:20%;
         background-color: white;
-        border: 1px solid #04AA6D;
-        padding: 10px;
-        border-radius: 10px;
         color: black;
-        cursor: pointer; /* Add a pointer cursor on hover */
     }
 
     .table {
@@ -89,8 +103,8 @@
     }
 
     th {
-        background-color: #04AA6D;
-        color: white;
+        background-color: white;
+        color: #4B49AC;
     }
 
     .password-container {

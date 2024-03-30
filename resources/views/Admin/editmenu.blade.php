@@ -1,48 +1,57 @@
 <div class="flex">
     @include('admin/adminNavbar')
     
-    <div class="content mt-16" style="margin-left:20%; height:1000px;">
-        <a href="" class="flex"><img src="{{asset('img/back.png')}}" alt="back-img" class="w-4 h-4"> Go back to menu</a>
-        <h1 class="emp-text">Edit Menu</h1>
-        <form action="{{ route('updateMenu', $menuItem->id) }}" method="post" enctype="multipart/form-data">
-            @csrf
-            @method('PUT') <!-- Use the PUT method for updating -->
+    <div class="content mt-16" style="height:1000px;">
+        <div style="margin-left:18%; margin-bottom: 2%;">
+            <a href="{{ route('admin.menu') }}" class="back">
+                <img src="{{ asset('img/back.png') }}" alt="back">
+                <span>BACK</span>
+            </a>
+        </div>
+        <div style="margin-left:20%;">
 
-            <div class="form-group">
-                <label for="name">Item Name:</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ $menuItem->name }}" required>
-            </div>
+            <h1 class="emp-text">Edit Menu</h1>
+            <form action="{{ route('updateMenu', $menuItem->id) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PUT') <!-- Use the PUT method for updating -->
 
-            <div class="form-group">
-                <label for="category_id">Item Category:</label>
-                <select name="category_id" id="category" class="form-control">
-                    <option value="" disabled>-- Select category --</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ $category->id == $menuItem->category_id ? 'selected' : '' }}>
-                            {{ $category->category }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="name">Item Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{ $menuItem->name }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category_id">Item Category:</label>
+                    <select name="category_id" id="category" class="form-control">
+                        <option value="" disabled>-- Select category --</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ $category->id == $menuItem->category_id ? 'selected' : '' }}>
+                                {{ $category->category }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
 
-            <div class="form-group">
-                <label for="price">Item Price:</label>
-                <input type="number" id="price" name="price" class="form-control" value="{{ $menuItem->price }}" required>
-            </div>
+                <div class="form-group">
+                    <label for="price">Item Price:</label>
+                    <input type="number" id="price" name="price" class="form-control" value="{{ $menuItem->price }}" required>
+                </div>
 
-            <div class="form-group">
-                <label for="description">Item Description:</label>
-                <input type="text" id="description" name="description" class="form-control" value="{{ $menuItem->description }}" required>
-            </div>
+                <div class="form-group">
+                    <label for="description">Item Description:</label>
+                    <input type="text" id="description" name="description" class="form-control" value="{{ $menuItem->description }}" required>
+                </div>
 
-            <div class="form-group">
-                <label for="image">Item Image:</label>
-                <input type="file" id="image" name="image" class="form-control" accept="image/*">
-            </div>
+                <div class="form-group">
+                    <label for="image">Item Image:</label>
+                    <input type="file" id="image" name="image" class="form-control" accept="image/*">
+                </div>
 
-            <button type="submit" class="btn btn-primary">Update Item</button>
-        </form>
+                <button type="submit" class="btn btn-primary">Update Item</button>
+            </form>
+
+        </div>
     </div>
 </div>
 
@@ -50,6 +59,22 @@
 <style>
     .flex {
         display: flex;
+    }
+
+    .back {
+        display: flex;
+        align-items: center; /* Center items vertically */
+        text-decoration: none; /* Remove underline from the link */
+    }
+    
+    .back img {
+        width: 50px;
+    }
+    
+    .back span {
+        margin-left: 5px; 
+        font-size: 18px; 
+        color: #4B49Ac; 
     }
 
     .content {
@@ -64,7 +89,8 @@
 
     .content button {
         width:20%;
-        background-color: #04AA6D;
+        background-color: #4B49Ac;
+        border: 1px solid #4B49Ac;
         padding: 10px;
         margin-top: 1%;
         border-radius: 10px;
@@ -73,14 +99,8 @@
     }
 
     .content button:hover {
-        width:20%;
         background-color: white;
-        border: 1px solid #04AA6D;
-        padding: 10px;
-        border-radius: 10px;
-       
         color: black;
-        cursor: pointer; /* Add a pointer cursor on hover */
     }
 
     form{

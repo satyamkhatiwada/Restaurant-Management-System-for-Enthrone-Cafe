@@ -14,8 +14,8 @@ class EmployeeController extends Controller
     }
     
     public function index(){
-        $waiter = Waiter::all();
-        return view('admin.employee', compact('waiter'));
+        $waiters = Waiter::paginate(6);
+        return view('admin.employee', compact('waiters'));
     }
 
     public function addWaiter(){

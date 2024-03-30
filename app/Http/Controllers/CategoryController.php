@@ -8,7 +8,7 @@ class CategoryController extends Controller
 {
     //
     public function addCategory(){
-        $category = Category::all();
+        $category = Category::paginate(5);
         return view('admin.addCategory',compact('category'));
     }
 

@@ -61,21 +61,17 @@
 
     #add-employee a {
         width:20%;
-        background-color: #04AA6D;
+        background-color: #7978E9;
         padding: 10px;
+        border: 1px solid #7978E9;
         border-radius: 10px;
         color: white;
         cursor: pointer; /* Add a pointer cursor on hover */
     }
 
     #add-employee a:hover {
-        width:20%;
         background-color: white;
-        border: 1px solid #04AA6D;
-        padding: 10px;
-        border-radius: 10px;
         color: black;
-        cursor: pointer; /* Add a pointer cursor on hover */
     }
 
     .no-items{
@@ -102,8 +98,8 @@
     }
 
     th {
-        background-color: #04AA6D;
-        color: white;
+        background-color: white;
+        color: #4B49AC;
     }
 
 </style>

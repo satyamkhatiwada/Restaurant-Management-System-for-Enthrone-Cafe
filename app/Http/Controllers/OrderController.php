@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\CartItem;
+use App\Models\WaiterOrder;
 use Illuminate\Support\Facades\DB;
 
 // require '../vendor/autoload.php';
@@ -17,9 +18,27 @@ use Cixware\Esewa\Config;
 class OrderController extends Controller
 {
     public function index(){
-        $order = Order::all();
-        return view('admin.order', compact('order'));
+        $orders = Order::paginate(8);
+        return view('admin.order', compact('orders'));
     }
+
+    public function indexwaiter(){
+        $waiterOrders = WaiterOrder::with('table')->paginate(8);
+        return view('admin.waiterorder', compact('waiterOrders'));
+    }
+    
+    public function updateOrderStatus(Request $request, $id){
+        $request->validate([
+            'status' => 'required|in:pending,canceled,confirmed,processing,dispatched,completed',
+        ]);
+        
+        $order = Order::findOrFail($id);
+        $order->status = $request->input('status');
+        $order->save();
+        
+        return redirect()->back()->with('success', 'Status updated successfully');
+    }
+
     
     public function createOrder(Request $request){
      

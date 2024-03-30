@@ -6,19 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Order extends Model
+class WaiterOrder extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'phone_number',
+        'waiter_id',
+        'table_id',
         'items',
-        'delivery_address',
-        'landmark',
         'total_amount',
-        'tid',
-        'payment_method',
         'status',
     ];
 
@@ -35,9 +31,16 @@ class Order extends Model
             $model->id = 'O' . strtoupper(Str::random(5));
         });
     }
-
-    public function user()
+    public function table()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Table::class);
+    }
+
+    public function waiter()
+    {
+        return $this->belongsTo(Waiter::class);
     }
 }
+
+
+

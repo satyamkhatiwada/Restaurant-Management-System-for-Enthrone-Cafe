@@ -30,7 +30,7 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid code is required">
-						<input class="input100" type="text" name="code" placeholder="Email">
+						<input class="input100" type="text" name="code" placeholder="Waiter code">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>

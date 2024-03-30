@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('total_amount', 10, 2);
             $table->string('tid')->nullable();;
             $table->string('payment_method');
+            $table->enum('status', ['pending','canceled', 'confirmed', 'processing', 'dispatched', 'completed'])->default('pending');
             $table->timestamps();
         });
     }

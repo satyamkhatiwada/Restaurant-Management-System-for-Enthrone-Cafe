@@ -81,7 +81,8 @@ Route::group(['prefix' => 'waiter'], function () {
     Route::middleware(['auth:waiter'])->group(function () {
         Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('waiter.dashboard');
         Route::get('/order', [WaiterOrderController::class, 'index'])->name('waiter.order');
-
+        Route::get('/makeorder/{id}', [WaiterOrderController::class, 'makeOrder'])->name('makeOrder');
+        Route::post('/createorder/{id}', [WaiterOrderController::class, 'createOrder'])->name('waiter.createOrder');
     });    
 });
 
@@ -100,8 +101,13 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/menu', [Menu
 Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/category', [CategoryController::class, 'store'])->name('category.store');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/menu/{id}/edit', [MenuController::class, 'editMenu'])->name('editMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/menu/{id}', [MenuController::class, 'updateMenu'])->name('updateMenu');
+Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/updateStatus/{id}', [MenuController::class, 'updateStatus'])->name('updateStatus');
+Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/updateOrderStatus/{id}', [OrderController::class, 'updateOrderStatus'])->name('updateOrderStatus');
+Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/updateWaiterOrderStatus/{id}', [WaiterOrderController::class, 'updateWaiterOrderStatus'])->name('updateWaiterOrderStatus');
+
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/menu/{id}', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/order', [OrderController::class, 'index'])->name('admin.order');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/waiterorder', [OrderController::class, 'indexwaiter'])->name('admin.waiterorder');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/table', [BookingController::class, 'viewTable'])->name('admin.table');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/timeslot', [BookingController::class, 'viewTimeslot'])->name('admin.timeslot');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/bookings', [BookingController::class, 'viewBooking'])->name('admin.booking');

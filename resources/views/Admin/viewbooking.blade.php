@@ -40,7 +40,7 @@
     </div>  
     
     @else
-    <p class="no-items">No Timeslot present</p>
+    <p class="no-items">No Bookings present</p>
 @endif
 
 
@@ -94,8 +94,8 @@ th, td {
 }
 
 th {
-    background-color: #04AA6D;
-    color: white;
+    background-color: white;
+    color: #4B49AC;
 }
 
 </style>

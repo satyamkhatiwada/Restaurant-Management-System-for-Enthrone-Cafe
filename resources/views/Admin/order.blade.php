@@ -13,14 +13,14 @@
                     <th style="width:11.11%;">Total (inclusive of delivery and tax)</th>
                     <th colspan="2" style="text-align: center;">Delivery Address</th>
                     <th>Payment Method</th>
-                    <th>Actions</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 @php
-                    $sn = 1; // Initialize the serial number
+                    $sn = $orders->firstItem();
                 @endphp
-                @foreach($order as $order)
+                @foreach($orders as $order)
                     <tr>
                         <td>{{$sn++}}</td>
                         <td>{{$order->id}}</td>
@@ -41,12 +41,27 @@
                         <td>
                             {{($order->payment_method)}}
                         </td>
-                        <td></td>
+                        <td>
+                            <form action="{{ route('updateOrderStatus', $order->id) }}" method="POST" id="statusForm_{{ $order->id }}">
+                                @csrf
+                                @method('PUT')
+                                <select name="status" onchange="updateOrderStatus(this.value, '{{ $order->id }}')">
+                                    <option value="pending" {{ $order->status === 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="canceled" {{ $order->status === 'canceled' ? 'selected' : '' }}>Canceled</option>
+                                    <option value="confirmed" {{ $order->status === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                                    <option value="processing" {{ $order->status === 'processing' ? 'selected' : '' }}>Processing</option>
+                                    <option value="dispatched" {{ $order->status === 'dispatched' ? 'selected' : '' }}>Dispatched</option>
+                                    <option value="completed" {{ $order->status === 'completed' ? 'selected' : '' }}>Completed</option>
+                                </select>
+                            </form>
+                        </td>
 
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <br>
+        {{ $orders->links() }}
     </div>
 </div>
 
@@ -82,9 +97,21 @@
     }
 
     th {
-        background-color: #04AA6D;
-        color: white;
+        background-color: white;
+        color: #4B49AC;
     }
 </style>
+
+<script>
+    function updateOrderStatus(status, orderId) {
+        // Get the form by ID
+        let form = document.getElementById('statusForm_' + orderId);
+        // Set the selected status value
+        form.querySelector('select[name="status"]').value = status;
+        // Submit the form
+        form.submit();
+    }
+</script>
+
 
 

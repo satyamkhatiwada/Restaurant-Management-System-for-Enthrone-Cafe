@@ -51,13 +51,13 @@
     }
 
     .content a.active {
-        background-color: #04AA6D;
+        background-color: #7978e9;
         border: 1px solid lightgray;
         color: white;
     }
 
     .content a:hover {
-        background-color: #04AA6D;
+        background-color: #7978e9;
         border: 1px solid #04AA6D;
         padding: 10px;
         border-radius: 10px;

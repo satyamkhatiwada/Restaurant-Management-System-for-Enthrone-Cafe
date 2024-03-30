@@ -8,38 +8,53 @@
         <a href="{{ route('admindashboard') }}" class="{{ request()->routeIs('admindashboard') ? 'active' : '' }}" id="panel-link">
             Panel
         </a>
-    </li>
+    </li><hr>
 
     <li class="mb-2">
         <a href="{{ route('admin.menu') }}" class="{{ request()->routeIs('admin.menu') ? 'active' : '' }}" id="menu-link">
             Menu
         </a>
-    </li>
+    </li><hr>
     <li class="mb-2">
         <a href="{{ route('employee') }}" class="{{ request()->routeIs('employee') ? 'active' : '' }}" id="employee-link">
             Employee
         </a>
-    </li>
+    </li><hr>
+
     <li class="mb-2">
-        <a href="{{ route('admin.order') }}" class="{{ request()->routeIs('admin.order') ? 'active' : '' }}" id="order-link">
+        <a href="#" id="order-link">
             Orders
         </a>
     </li>
+
+    <li class="mb-2" id="online-orders" style="display: block;"> 
+        <a href="{{ route('admin.order') }}" class="{{ request()->routeIs('admin.order') ? 'active' : '' }}" id="order-link-online" style="padding-left:15%;">
+            Online Orders
+        </a>
+    </li>
+
+    <li class="mb-2" id="in-house-orders" style="display: block;"> 
+        <a href="{{ route('admin.waiterorder') }}" class="{{ request()->routeIs('admin.waiterorder') ? 'active' : '' }}" id="order-link-waiter" style="padding-left:15%;">
+            In-house Orders
+        </a>
+    </li><hr>
+
 
     <li class="mb-2">
         <a href="{{ route('admin.booking') }}" class="{{ request()->routeIs('admin.booking') ? 'active' : '' }}" id="booking-link">
             Table bookings
         </a>
-    </li>
+    </li><hr>
 
     <li class="mb-2">
         <a href="#" class="{{ request()->routeIs('inventory') ? 'active' : '' }}" id="inventory-link">
             Inventory
         </a>
-    </li>
+    </li><hr>
 </ul>
 
 <style>
+
     body {
         margin: 0;
     }
@@ -48,7 +63,7 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
-        width: 20%;
+        width: 18%;
         background-color: #F8F8F8;
         position: fixed;
         height: 100%;
@@ -58,13 +73,13 @@
     li a,
     .admin-text {
         display: block;
-        color: #000;
+        color: #4B49AC;
         padding: 8px 16px;
         text-decoration: none;
     }
 
     li a.active {
-        background-color: #04AA6D;
+        background-color: #4B49AC;
         color: white;
     }
 
@@ -75,19 +90,43 @@
 </style>
 
 <script>
-    // Get all links
-    const links = document.querySelectorAll('li a');
+    document.addEventListener("DOMContentLoaded", function () {
+        const orderLink = document.getElementById('order-link');
+            const onlineOrders = document.getElementById('online-orders');
+            const inHouseOrders = document.getElementById('in-house-orders');
 
-    // Add click event listener to each link
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            // Remove active class from all links
-            links.forEach(l => l.classList.remove('active'));
+            let ordersVisible = false; // Flag to track visibility
 
-            // Add active class to the clicked link
-            link.classList.add('active');
+            orderLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default behavior of the link
+
+                // Toggle visibility of online and in-house orders
+                if (ordersVisible) {
+                    onlineOrders.style.display = 'none';
+                    inHouseOrders.style.display = 'none';
+                } else {
+                    onlineOrders.style.display = 'block';
+                    inHouseOrders.style.display = 'block';
+                }
+
+                // Update the flag
+                ordersVisible = !ordersVisible;
+            });
+
+            // Get all links including the "Orders" and "In-house Orders" / "Online Orders"
+            const links = document.querySelectorAll('li a');
+
+            // Add click event listener to each link
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Display all nav items when "Orders" and one of the two items is clicked
+                    if (ordersVisible && (link.id === 'order-link-waiter' || link.id === 'order-link-online')) {
+                        links.forEach(l => l.parentNode.style.display = 'block');
+                    }
+                });
+            });
         });
-    });
+
 </script>
 
 </x-app-layout>
