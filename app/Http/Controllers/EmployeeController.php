@@ -10,7 +10,7 @@ class EmployeeController extends Controller
     public function dashboard()
     {
         $waiterData = auth()->guard('waiter')->user(); // Retrieve authenticated waiter data
-        return view('waiter.dashboard', ['waiterData' => $waiterData]);
+        return view('waiter.home', ['waiterData' => $waiterData]);
     }
     
     public function index(){
