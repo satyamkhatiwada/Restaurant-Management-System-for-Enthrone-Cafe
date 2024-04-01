@@ -5,8 +5,8 @@
             <div class="wi-50" style="box-sizing: border-box;">
                 <div class="waiter-details" style="width: 100%;">
                     <h1><span style="font-size: 40px; font-weight: bolder; color: #6d2f44;">WELCOME, CONTINUE YOUR JOURNEY!!</span></h1>
-                    <h1>Waiter code:</h1>
-                    <h1>Total order taken:</h1>
+                    <h1>Waiter code: <span>{{ Auth::user()->code}}</span></h1>
+                    <h1>Total order taken: <span>{{ $totalOrders }}</span></h1>
                 </div>
             </div>
             <div class="wi-50" style="display: flex; justify-content: center; align-items: center;">

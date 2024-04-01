@@ -83,6 +83,8 @@ Route::group(['prefix' => 'waiter'], function () {
         Route::get('/order', [WaiterOrderController::class, 'index'])->name('waiter.order');
         Route::get('/makeorder/{id}', [WaiterOrderController::class, 'makeOrder'])->name('makeOrder');
         Route::post('/createorder/{id}', [WaiterOrderController::class, 'createOrder'])->name('waiter.createOrder');
+        Route::put('/updateWaiterOrderStatusByWaiter/{id}', [WaiterOrderController::class, 'updateWaiterOrderStatusByWaiter'])->name('updateWaiterOrderStatusByWaiter');
+
     });    
 });
 
@@ -104,7 +106,6 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/menu/{id}', [
 Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/updateStatus/{id}', [MenuController::class, 'updateStatus'])->name('updateStatus');
 Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/updateOrderStatus/{id}', [OrderController::class, 'updateOrderStatus'])->name('updateOrderStatus');
 Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/updateWaiterOrderStatus/{id}', [WaiterOrderController::class, 'updateWaiterOrderStatus'])->name('updateWaiterOrderStatus');
-
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/menu/{id}', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/order', [OrderController::class, 'index'])->name('admin.order');
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/waiterorder', [OrderController::class, 'indexwaiter'])->name('admin.waiterorder');

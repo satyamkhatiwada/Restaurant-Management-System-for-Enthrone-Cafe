@@ -15,7 +15,7 @@ class UserMenuController extends Controller
     }
 
     // Retrieve menu items for all users
-    $menuItems = MenuItem::all();
+    $menuItems = MenuItem::where('status', 'active')->get();
     $categories = Category::all();
     // Pass menu items to the view
     return view('menu', compact('menuItems','categories'));

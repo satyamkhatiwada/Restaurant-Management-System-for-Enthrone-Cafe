@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 use App\Models\Waiter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\WaiterOrder;
 
 class EmployeeController extends Controller
 {
     public function dashboard()
     {
         $waiterData = auth()->guard('waiter')->user(); // Retrieve authenticated waiter data
-        return view('waiter.home', ['waiterData' => $waiterData]);
+        $waiterId = $waiterData->id; // Get the ID of the logged-in waiter from $waiterData
+        $totalOrders = WaiterOrder::where('waiter_id', $waiterId)->count();
+        
+        return view('waiter.home', compact('waiterData', 'totalOrders'));
     }
     
     public function index(){

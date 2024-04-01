@@ -41,6 +41,18 @@ class WaiterOrderController extends Controller
         return redirect()->back()->with('success', 'Status updated successfully');
     }
 
+    public function updateWaiterOrderStatusByWaiter(Request $request, $id){
+        $request->validate([
+            'status' => 'required|in:confirmed,completed',
+        ]);
+
+        $order = WaiterOrder::findOrFail($id);
+        $order->status = $request->input('status');
+        $order->save();
+        
+        return redirect()->back()->with('success', 'Status updated successfully');
+    }
+
     public function createOrder(Request $request, $id){
         $totalAmount = $request->input('total_amount');
         $items = json_decode($request->input('items'), true);

@@ -14,20 +14,31 @@
                 @php
                     $waiterOrder = App\Models\WaiterOrder::where('table_id', $table->id)->first();
                 @endphp
-                <div class="table-btn{{ $waiterOrder && $waiterOrder->status === 'confirmed' ? ' processing' : '' }}" style="width: 18%; height: 150px; margin: 10px; text-align: center; position: relative;">
-                    <div class="table-info" data-table="{{ $table->id }}">
-                        {{ $table->name }}
-                        @if ($waiterOrder && $waiterOrder->status === 'confirmed')
-                            <span class="status-text">Processing</span>
-                            <!-- <form id="markAsCompletedForm-{{ $table->id }}" method="POST" action="{{ route('updateWaiterOrderStatus', ['id' => $table->id]) }}" style="position: absolute; bottom: 10px; right: 10px;">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="mark-as-completed-btn" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 5px;">Mark as Completed</button>
-                            </form> -->
-                        @else
-                            <span class="status-text">Take Order</span>
-                        @endif
+                <div class="table-item-wrapper" style="width: 20%; text-align: center;">
+                    <div class="table-btn{{ $waiterOrder && $waiterOrder->status === 'confirmed' ? ' processing' : '' }}" style="height: 150px; position: relative;">
+                        <div class="table-info" data-table="{{ $table->id }}">
+                            {{ $table->name }}
+                            @if ($waiterOrder && $waiterOrder->status === 'confirmed')
+                                <span class="status-text">Processing</span>
+                            @else
+                                <span class="status-text">Take Order</span>
+                            @endif
+                        </div>
                     </div>
+                    <!-- Three dots button outside of the card -->
+                    @if ($waiterOrder && $waiterOrder->status === 'confirmed')
+                        <div class="three-dots" style="position: absolute; top: 8%; right: -1px; transform: translateY(-50%); cursor: pointer;">
+                            <button class="dot-btn">...</button>
+                            <div class="dot-options" style="display: none; position: absolute; top: 20px; right: -20px; background-color: #fff; border: 1px solid #ccc; border-radius: 5px; padding: 5px;">
+                                <form method="POST" action="{{ route('updateWaiterOrderStatusByWaiter', $waiterOrder->id) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="status" value="completed"> <!-- Add a hidden input field to pass the status -->
+                                    <button type="submit" class="mark-as-completed-btn">Mark as Completed</button>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             @endforeach
         </div>
@@ -36,6 +47,23 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const dotsButtons = document.querySelectorAll('.dot-btn');
+
+        dotsButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const options = button.nextElementSibling;
+                options.style.display = options.style.display === 'none' ? 'block' : 'none';
+                event.stopPropagation(); // Prevent the click event from bubbling up to the parent
+            });
+        });
+
+        document.addEventListener('click', () => {
+            dotsButtons.forEach(button => {
+                const options = button.nextElementSibling;
+                options.style.display = 'none';
+            });
+        });
+
         const tableButtons = document.querySelectorAll('.table-btn');
 
         tableButtons.forEach(button => {
@@ -48,6 +76,8 @@
 </script>
 
 <style>
+    /* Your existing styles */
+
     .content {
         width: 100%;
         flex: 1;
@@ -67,8 +97,13 @@
         margin-top: 20px; /* Adjust the margin as needed */
     }
 
+    .table-item-wrapper {
+        position: relative; /* Ensure relative positioning for absolute child elements */
+    }
+
     .table-btn {
         display: inline-block;
+        width:80%;
         padding: 10px 20px; /* Adjust padding as needed */
         background-color: #fff; /* Set the background color */
         color: #333; /* Set the text color */
