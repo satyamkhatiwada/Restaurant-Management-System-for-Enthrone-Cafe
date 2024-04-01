@@ -3,6 +3,18 @@
 
     <div class="content mt-16" style="margin-left:20%; height:1000px;">
         <h1 class="emp-text">Orders</h1>
+        <div style="text-align: right;">
+            <label for="statusFilter" style="font-weight: bolder;">Filter by Status:</label>
+            <select id="statusFilter" onchange="filterOrders()">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="canceled">Canceled</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="processing">Processing</option>
+                <option value="dispatched">Dispatched</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -16,12 +28,12 @@
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="ordersTableBody">
                 @php
                     $sn = $orders->firstItem();
                 @endphp
                 @foreach($orders as $order)
-                    <tr>
+                    <tr class="orderRow {{ $order->status }}">
                         <td>{{$sn++}}</td>
                         <td>{{$order->id}}</td>
                         <td>
@@ -100,9 +112,27 @@
         background-color: white;
         color: #4B49AC;
     }
+
+    .orderRow {
+        display: table-row;
+    }
+
 </style>
 
 <script>
+    function filterOrders() {
+        const statusFilter = document.getElementById('statusFilter').value;
+        const orderRows = document.querySelectorAll('.orderRow');
+        
+        orderRows.forEach(row => {
+            if (statusFilter === 'all' || row.classList.contains(statusFilter)) {
+                row.style.display = ''; // Show the row
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+    }
+    
     function updateOrderStatus(status, orderId) {
         // Get the form by ID
         let form = document.getElementById('statusForm_' + orderId);

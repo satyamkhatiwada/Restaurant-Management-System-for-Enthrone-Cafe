@@ -3,6 +3,14 @@
 
     <div class="content mt-16" style="margin-left:20%; height:1000px;">
         <h1 class="emp-text">In-house Orders</h1>
+        <div style="text-align: right;">
+            <label for="statusFilter" style="font-weight: bolder;">Filter by Status:</label>
+            <select id="statusFilter" onchange="filterOrders()">
+                <option value="all">All</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -15,12 +23,12 @@
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="ordersTableBody">
                 @php
                     $sn = $waiterOrders->firstItem();
                 @endphp
                 @foreach($waiterOrders as $waiterOrder)
-                    <tr>
+                    <tr class="orderRow {{ $waiterOrder->status }}">
                         <td>{{$sn++}}</td>
                         <td>{{$waiterOrder->id}}</td>
                         <td>{{$waiterOrder->table->name}}</td>
@@ -41,16 +49,39 @@
                                 </select>
                             </form>
                         </td>
-
                     </tr>
                 @endforeach
-                
             </tbody>
         </table>
         <br>
         {{ $waiterOrders->links() }}
     </div>
 </div>
+
+<script>
+    function filterOrders() {
+        const statusFilter = document.getElementById('statusFilter').value;
+        const orderRows = document.querySelectorAll('.orderRow');
+        
+        orderRows.forEach(row => {
+            if (statusFilter === 'all' || row.classList.contains(statusFilter)) {
+                row.style.display = ''; // Show the row
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+    }
+
+    function updateOrderStatus(status, orderId) {
+        // Get the form by ID
+        let form = document.getElementById('statusForm_' + orderId);
+        // Set the selected status value
+        form.querySelector('select[name="status"]').value = status;
+        // Submit the form
+        form.submit();
+    }
+</script>
+
 
 <style>
     .flex {
@@ -87,17 +118,13 @@
         background-color: white;
         color: #4B49AC;
     }
+
+    .orderRow {
+        display: table-row;
+    }
+
+  
 </style>
 
-<script>
-    function updateOrderStatus(status, orderId) {
-        // Get the form by ID
-        let form = document.getElementById('statusForm_' + orderId);
-        // Set the selected status value
-        form.querySelector('select[name="status"]').value = status;
-        // Submit the form
-        form.submit();
-    }
-</script>
 
 
