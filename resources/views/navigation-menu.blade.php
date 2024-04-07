@@ -38,12 +38,8 @@
                             Menu
                         </x-nav-link>
 
-                        <x-nav-link href="#" :active="request()->routeIs('about')">
+                        <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">
                             About
-                        </x-nav-link>
-
-                        <x-nav-link href="#" :active="request()->routeIs('contact')">
-                            Contact
                         </x-nav-link>
 
                     @endif

@@ -1,144 +1,127 @@
-<!DOCTYPE html>
-<html>
+<footer class="footer-area bg-dark text-white pt-5 pb-3">
+  <div class="container" style="justify-content: center; width: 80%; margin:auto;">
+    <div class="flex">
+      <!-- About Us -->
+      <div class="col-md-3">
+        <h5>About Us</h5>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> Rotopul, Kathmandu<br>
+          <i class="fas fa-phone"></i> <a href="tel:+1234567890" class="footer-link">+1234567890</a><br>
+          <i class="fas fa-envelope"></i> <a href="mailto:info@example.com" class="footer-link">info@example.com</a>
+        </p>
+        <a href="your-about-us-link" class="btn btn-outline-light btn-sm">Find More</a>
+      </div>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untitled</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-</head>
+      <!-- Services -->
+      <div class="col-md-3">
+        <h5>Services</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Order Online</a></li>
+          <li><a href="#">Table Reservation</a></li>
+        </ul>
+      </div>
 
-<body>
-    <div class="footer-clean">
-        <footer>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-sm-4 col-md-3 item">
-                        <h3>Services</h3>
-                        <ul>
-                            <li><a href="#">Web design</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Hosting</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-4 col-md-3 item">
-                        <h3>About</h3>
-                        <ul>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Legacy</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-4 col-md-3 item">
-                        <h3>Careers</h3>
-                        <ul>
-                            <li><a href="#">Job openings</a></li>
-                            <li><a href="#">Employee success</a></li>
-                            <li><a href="#">Benefits</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
-                        <p class="copyright">Company Name © 2018</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-</body>
+      <!-- Payment Options -->
+      <div class="col-md-3">
+        <h5>Payment Options</h5>
+        <a href="#"><img src="{{asset('img/esewa2.png')}}" alt="eSewa Payment" class="payment-logo"></a> <br>
+        <a href="#"><img src="{{asset('img/cod2.png')}}" alt="Cash On Delivery" class="payment-logo" style="height: 35%; width: 60%;"></a>
+      </div>
 
-</html>
+      <!-- Follow Us -->
+      <div class="col-md-3">
+        <h5>Follow Us</h5>
+        <div class="social-icons">
+          <a href="#" class="bi bi-facebook"> Facebook</a><br>
+          <a href="#" class="bi bi-instagram"> Instagram</a><br>
+          <a href="#" class="bi bi-whatsapp"> WhatsApp</a><br>
+        </div>
+      </div>
 
-<!-- Credit to https://epicbootstrap.com/snippets/footer-with-columns -->
+      <div class="col-md-3"> <!-- Increased to 'col-md-3' from 'col-md-2' -->
+        <h5>Find Us</h5>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.6773409914187!2d85.32378831506181!3d27.70359573298252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb192d6e52b0bf%3A0xc424dfe7297397ec!2sRatopul%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1646400790917!5m2!1sen!2snp" width="100%" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+      </div>
+
+    </div> 
+  </div>
+
+  <div>
+      <h1 class="text-center mt-4">&copy; 2024 Satyam Khatiwada. All rights reserved.</h1>
+  </div>
+  
+</footer>
+
 
 <style>
-    .footer-clean {
-  padding:50px 0;
-  background-color:#fff;
-  color:#4b4c4d;
+  /* Footer styles */
+.footer-area {
+  margin-top: 2%;
+  background-color: #333333;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  padding-top: 5rem;
+  padding-bottom: 1rem;
+  width: 100%;
 }
 
-.footer-clean h3 {
-  margin-top:0;
-  margin-bottom:12px;
-  font-weight:bold;
-  font-size:16px;
+.footer-area h5, .footer-area p, .footer-area li, .footer-area a {
+  font-size: 16px;
+  color: #ffffff;
 }
 
-.footer-clean ul {
-  padding:0;
-  list-style:none;
-  line-height:1.6;
-  font-size:14px;
-  margin-bottom:0;
+.footer-area a {
+  transition: color 0.2s;
+  cursor: pointer;
 }
 
-.footer-clean ul a {
-  color:inherit;
-  text-decoration:none;
-  opacity:0.8;
+.footer-area a:hover {
+  color: #ffc107;
+  text-decoration: none;
 }
 
-.footer-clean ul a:hover {
-  opacity:1;
+.footer-area .btn {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
 }
 
-.footer-clean .item.social {
-  text-align:right;
+.footer-area .btn:hover {
+  color: #ffc107;
 }
 
-@media (max-width:767px) {
-  .footer-clean .item {
-    text-align:center;
-    padding-bottom:20px;
-  }
+.social-icons a, .social-icons img {
+  font-size: 16px;
+  color: #ffffff;
+  width: auto;
+  height: 1em;
+  vertical-align: middle;
 }
 
-@media (max-width: 768px) {
-  .footer-clean .item.social {
-    text-align:center;
-  }
+.payment-logo, .social-logo {
+  width: auto;
+  height: 3rem;
+  vertical-align: middle;
 }
 
-.footer-clean .item.social > a {
-  font-size:24px;
-  width:40px;
-  height:40px;
-  line-height:40px;
-  display:inline-block;
-  text-align:center;
-  border-radius:50%;
-  border:1px solid #ccc;
-  margin-left:10px;
-  margin-top:22px;
-  color:inherit;
-  opacity:0.75;
+.map-container iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 4px;
 }
 
-.footer-clean .item.social > a:hover {
-  opacity:0.9;
+.text-center {
+  color: #ffffff;
+  text-align: center;
 }
 
-@media (max-width:991px) {
-  .footer-clean .item.social > a {
-    margin-top:40px;
-  }
+/* Equal width for each column */
+.col-md-3 {
+  flex-basis: 25%;
+  max-width: 25%;
 }
 
-@media (max-width:767px) {
-  .footer-clean .item.social > a {
-    margin-top:10px;
-  }
-}
-
-.footer-clean .copyright {
-  margin-top:14px;
-  margin-bottom:0;
-  font-size:13px;
-  opacity:0.6;
-}
-
-/* Credit to https://epicbootstrap.com/snippets/footer-with-columns */
 </style>

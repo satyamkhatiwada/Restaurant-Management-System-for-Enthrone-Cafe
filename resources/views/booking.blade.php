@@ -24,35 +24,26 @@
                     <input type="email" id="email" name="email" class="form-control input" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="table_id" class="label">Select Capacity:</label>
+                    <label for="table_id" class="label">Select Table:</label>
                     <select id="table_id" name="table_id" class="form-control input" required>
-                        <option value="">Select capacity</option>
+                        <option value="">Select Table</option>
                         @foreach($tables as $table)
-                            <option value="{{ $table->id }}">{{ $table->capacity }} people</option>
+                            <option value="{{ $table->id }}">{{$table->name}}, {{ $table->capacity }} people</option>
                         @endforeach
                     </select>
                 </div>
-                <label for="time_slot_id" class="label">Select Time Slot:</label>
-                <div class="flex">
-                    <div class="form-group w-50">
-                    <select id="start_time" name="start_time" class="form-control input" required>
-                        <option value="">Select Start Time</option>
+                
+                <div class="form-group">
+                    <label for="time_slot_id" class="label">Select Time Slot:</label>
+
+                    <select id="time_slot_id" name="time_slot_id" class="form-control input" required>
+                    <option value="">Select Start Time</option>
                         @foreach($timeslots as $timeSlot)
-                            <option value="{{ $timeSlot->id }}">{{ $timeSlot->start_time }}</option>
+                            <option value="{{ $timeSlot->id }}">{{ $timeSlot->start_time }} - {{$timeSlot->end_time}}</option>
                         @endforeach
                     </select>
-                    </div>
-
-                    <div class="form-group w-50">
-                    <select id="end_time" name="end_time" class="form-control input" required>
-                        <option value="">Select End Time</option>
-                        @foreach($timeslots as $timeSlot)
-                            <option value="{{ $timeSlot->id }}">{{ $timeSlot->end_time }}</option>
-                        @endforeach
-                    </select>
-                    </div>
-
                 </div>
+                
                 <div class="form-group">
                     <label for="date" class="label">Date:</label>
                     <input type="date" id="date" name="date" class="form-control input" required
@@ -169,3 +160,5 @@
         width: 49%;
     }
 </style>
+
+@extends('footer')

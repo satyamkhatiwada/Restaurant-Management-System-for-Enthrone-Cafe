@@ -13,6 +13,7 @@ use App\Http\Controllers\WaiterAuthController;
 use App\Http\Controllers\WaiterOrderController;
 use App\Http\Controllers\BookingController;
 
+
  
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::get('/', function () {
 
 
 Route::get('/menu', [UserMenuController::class, 'index'])->name('menu'); 
+Route::get('/about', [AboutController::class, 'about'])->name('about'); 
 
 Route::group(['prefix'=>'admin','middleware'=>['admin:admin']],function(){
     Route::get('/login', [AdminController::class, 'loginForm']);
@@ -118,6 +120,7 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/addtimeslot',
 Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/timeslots', [BookingController::class, 'storeTimeslot'])->name('storeTimeslot');
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/timeslot/{id}', [BookingController::class, 'deleteTimeslot'])->name('deleteTimeslot');
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/table/{id}', [BookingController::class, 'deleteTable'])->name('deleteTable');
+Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/updateBookingStatus/{id}', [BookingController::class, 'updateBookingStatus'])->name('updateBookingStatus');
 
 
 

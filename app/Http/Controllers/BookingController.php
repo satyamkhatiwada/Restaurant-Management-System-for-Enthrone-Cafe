@@ -47,6 +47,18 @@ class BookingController extends Controller
         return view('admin.viewbooking', compact('bookings'));
     }
 
+    public function updateBookingStatus(Request $request, $id){
+        $request->validate([
+            'status' => 'required|in:pending,canceled,confirmed',
+        ]);
+        
+        $booking = Booking::findOrFail($id);
+        $booking->status = $request->input('status');
+        $booking->save();
+        
+        return redirect()->back()->with('success', 'Status updated successfully');
+    }
+
     public function viewTable(){
         $tables =  Table::all();
         return view('admin.table', compact('tables'));

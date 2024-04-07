@@ -1,6 +1,4 @@
-
-
-<div class="flex" style="text-decoration: none;"> 
+<div style="text-decoration: none;"> 
     @if (auth()->check())
         @include('user.dashboard')
     @else
@@ -8,7 +6,7 @@
 
     @endif
 
-    <div class="content mt-16">
+    <div class="content">
         <img src="img/menu.webp" style="width:100%; height: 45vh; object-fit: cover;  filter: brightness(50%); position: relative;">
         <h1 class="emp-text">Our Menu</h1>
         <div class="category-container">
@@ -232,6 +230,7 @@
         border: 1px solid #04AA6D;
         color: black;
     }
-
-
 </style>
+
+@extends('footer')
+

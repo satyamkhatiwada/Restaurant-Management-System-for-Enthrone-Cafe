@@ -29,10 +29,20 @@
                         <td>{{$booking->name}}</td>
                         <td>{{$booking->email}}</td>
                         <td>{{$booking->phone}}</td>
-                        <td>{{$booking->table_id}}</td>
-                        <td>{{$booking->time_slot_id}}</td>
+                        <td>{{$booking->table->name}}</td>
+                        <td>{{$booking->timeSlot->start_time}} - {{$booking->timeSlot->end_time}}</td> 
                         <td>{{$booking->date}}</td>
-
+                        <td>
+                            <form action="{{ route('updateBookingStatus', $booking->id) }}" method="POST" id="statusForm_{{ $booking->id }}">
+                                @csrf
+                                @method('PUT')
+                                <select name="status" onchange="updateBookingStatus(this.value, '{{ $booking->id }}')">
+                                    <option value="pending" {{ $booking->status === 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="canceled" {{ $booking->status === 'canceled' ? 'selected' : '' }}>Canceled</option>
+                                    <option value="confirmed" {{ $booking->status === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                                </select>
+                            </form>
+                        </td>    
                     </tr>
                 @endforeach
             </tbody>
@@ -43,6 +53,16 @@
     <p class="no-items">No Bookings present</p>
 @endif
 
+<script>
+    function updateBookingStatus(status, orderId) {
+    // Get the form by ID
+    let form = document.getElementById('statusForm_' + orderId);
+    // Set the selected status value
+    form.querySelector('select[name="status"]').value = status;
+    // Submit the form
+    form.submit();
+    }
+</script>
 
 <style>
 #add-employee {
