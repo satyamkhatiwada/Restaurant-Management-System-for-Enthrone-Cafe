@@ -64,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/esewa', [OrderController::class, 'esewaCallback'])->name('esewa');
     Route::get('/success', [OrderController::class, 'esewaSuccess']);
     Route::get('/failure', [OrderController::class, 'esewaFailed']);
+    Route::get('/history', [OrderController::class, 'history'])->name('order.history');
 
 });
 

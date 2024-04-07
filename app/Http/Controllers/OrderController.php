@@ -135,4 +135,9 @@ class OrderController extends Controller
         }
     }
 
+    public function history(){
+        $orders = Order::where('user_id', auth()->id())->paginate(6);
+        return view('history', compact('orders'));
+    }    
+
 }

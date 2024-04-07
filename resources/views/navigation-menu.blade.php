@@ -64,30 +64,31 @@
         
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
-            @if (Auth::user() && !auth('admin')->check() && !auth('waiter')->check())
-                <div class="ms-3 relative">
-                    <a href="{{ route('cart.view') }}" :active="request()->routeIs('cart.view')">
-                        <div class="relative" style="background-image: url('{{ asset('img/cart.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 40px; height: 40px;">
-                            <!-- Calculate total quantities -->
-                            @php
-                                $cartItems = Auth::user()->cartItems;
-                                $totalQuantities = $cartItems->sum('quantity');
-                            @endphp
-                            <!-- Display counter badge if total quantities is greater than 0 -->
-                            @if ($totalQuantities > 0)
-                                <span class="absolute top-0 left-full -mt-1 ml-1 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">{{ $totalQuantities }}</span>
-                            @endif
-                        </div>
-                    </a>
-                </div>
-            @endif
+                @if (Auth::user() && !auth('admin')->check() && !auth('waiter')->check())
 
+                    <div class="ms-3 relative">
+                        <a href="{{ route('order.history') }}" :active="request()->routeIs('order.history')">
+                            <div class="relative" style="background-image: url('{{ asset('img/order.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 50px; height: 40px;">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ms-3 relative">
+                        <a href="{{ route('cart.view') }}" :active="request()->routeIs('cart.view')">
+                            <div class="relative" style="background-image: url('{{ asset('img/cart.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 40px; height: 40px;">
+                                <!-- Calculate total quantities -->
+                                @php
+                                    $cartItems = Auth::user()->cartItems;
+                                    $totalQuantities = $cartItems->sum('quantity');
+                                @endphp
+                                <!-- Display counter badge if total quantities is greater than 0 -->
+                                @if ($totalQuantities > 0)
+                                    <span class="absolute top-0 left-full -mt-1 ml-1 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">{{ $totalQuantities }}</span>
+                                @endif
+                            </div>
+                        </a>
+                    </div>
 
-
-
-
-
-
+                @endif
 
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
