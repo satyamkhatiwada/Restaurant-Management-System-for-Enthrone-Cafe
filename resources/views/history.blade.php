@@ -13,8 +13,29 @@
                         Order #{{ $order->id }}
                     </div>
                     <div class="card-body">
-                        <p>Total Amount: ${{ $order->total_amount }}</p>
-                        <p>Status: {{ $order->status }}</p>
+                        <p class="p-2">Total Amount: ${{ $order->total_amount }}</p>
+                        <p class="flex p-2">Status:
+                            @if($order->status == 'pending')
+                                <img src="{{ asset('img/pending.png') }}" alt="Pending" style="width: 30px; height: 30px;">
+                                <span style="font-weight: bold; color: #8B8000;">Pending</span>
+                            @elseif($order->status == 'completed')
+                                <img src="{{ asset('img/completed.png') }}" alt="Completed" style="width: 30px; height: 30px;">
+                                <span style="font-weight: bold; color: green;">Completed</span>
+                            @elseif($order->status == 'canceled')
+                                <img src="{{ asset('img/cancelled.png') }}" alt="Cancelled" style="width: 30px; height: 30px;">
+                                <span style="font-weight: bold; color: red;">Cancelled</span>
+                            @elseif($order->status == 'confirmed')
+                                <img src="{{ asset('img/confirmed.png') }}" alt="Confirmed" style="width: 30px; height: 30px;">
+                                <span style="font-weight: bold;">Confirmed</span>
+                            @elseif($order->status == 'processing')
+                                <img src="{{ asset('img/processing.png') }}" alt="Processing" style="width: 30px; height: 30px;">
+                                <span style="font-weight: bold; color: #80FF00;">Processing</span>
+
+                            @elseif($order->status == 'dispatched')
+                                <img src="{{ asset('img/dispatched.png') }}" alt="Dispatched" style="width: 30px; height: 30px;">
+                                <span style="font-weight: bold; color: #FF00FF;">Dispatched</span>
+                            @endif
+                        </p>
                     </div>
                 </div>
                 @endforeach
@@ -23,6 +44,7 @@
     </div>
 </div>
 @endauth
+
 
 
 @push('scripts')
