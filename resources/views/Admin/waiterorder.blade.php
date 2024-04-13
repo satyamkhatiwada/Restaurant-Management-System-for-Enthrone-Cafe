@@ -1,7 +1,7 @@
 <div class="flex">
     @include('admin/adminNavbar')
 
-    <div class="content mt-16" style="margin-left:20%; height:1000px;">
+    <div class="content mt-16" style="margin-left:18%; height:1000px;">
         <h1 class="emp-text">In-house Orders</h1>
         <div style="text-align: right;">
             <label for="statusFilter" style="font-weight: bolder;">Filter by Status:</label>
@@ -40,7 +40,7 @@
                         </td>
                         <td>{{ $waiterOrder->total_amount }}</td>
                         <td>
-                            <form action="{{ route('updateWaiterOrderStatus', $waiterOrder->id) }}" method="POST" id="statusForm_{{ $waiterOrder->id }}">
+                            <form action="{{ route('updateWaiterOrderStatus', $waiterOrder->id) }}" method="POST" id="statusForm_{{ $waiterOrder->id }}" style="margin:auto;>
                                 @csrf
                                 @method('PUT')
                                 <select name="status" onchange="updateOrderStatus(this.value, '{{ $waiterOrder->id }}')">

@@ -33,6 +33,9 @@ Route::get('/', function () {
 
 Route::get('/menu', [UserMenuController::class, 'index'])->name('menu'); 
 Route::get('/about', [AboutController::class, 'about'])->name('about'); 
+Route::get('/reservation', [BookingController::class, 'index'])->name('booking');
+Route::post('/reservation/store', [BookingController::class, 'storeBooking'])->name('bookings.store');
+
 
 Route::group(['prefix'=>'admin','middleware'=>['admin:admin']],function(){
     Route::get('/login', [AdminController::class, 'loginForm']);
@@ -65,13 +68,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/success', [OrderController::class, 'esewaSuccess']);
     Route::get('/failure', [OrderController::class, 'esewaFailed']);
     Route::get('/history', [OrderController::class, 'history'])->name('order.history');
-
-});
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/reservation', [BookingController::class, 'index'])->name('booking');
-    Route::post('/reservation/store', [BookingController::class, 'storeBooking'])->name('bookings.store');
-
 
 });
 
@@ -120,7 +116,10 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/tables', [Bo
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/addtimeslot', [BookingController::class, 'addTimeslot'])->name('addTimeslot');
 Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/timeslots', [BookingController::class, 'storeTimeslot'])->name('storeTimeslot');
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/timeslot/{id}', [BookingController::class, 'deleteTimeslot'])->name('deleteTimeslot');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/reschedule/{id}', [BookingController::class, 'reschedule'])->name('reschedule');
+Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/reschedule/{id}/edit', [BookingController::class, 'rescheduleBooking'])->name('rescheduleBooking');
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/table/{id}', [BookingController::class, 'deleteTable'])->name('deleteTable');
+Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/user/{id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
 Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/updateBookingStatus/{id}', [BookingController::class, 'updateBookingStatus'])->name('updateBookingStatus');
 
 

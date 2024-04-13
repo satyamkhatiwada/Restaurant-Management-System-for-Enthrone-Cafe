@@ -1,7 +1,7 @@
 <div class="flex">
     @include('admin/adminNavbar')
 
-    <div class="content mt-16" style="margin-left:20%; height:1000px;">
+    <div class="content mt-16" style="margin-left:18%; height:1000px;">
         <h1 class="emp-text">Employee</h1>
         <div class="add-employee">
             <a href="{{route('addWaiter')}}"><button>Create Waiter</button></a>

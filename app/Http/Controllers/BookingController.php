@@ -47,6 +47,38 @@ class BookingController extends Controller
         return view('admin.viewbooking', compact('bookings'));
     }
 
+    public function reschedule($id){
+        $bookings = Booking::find($id);
+        $tables = Table::all();
+        $timeslots = Timeslot::all();
+        
+    
+        return view('admin.reschedule', ['bookings' => $bookings, 'tables' => $tables, 'timeslots' => $timeslots]);
+    }
+    
+
+    public function rescheduleBooking(Request $request, $id){
+
+        $booking = Booking::find($id);
+
+        $request->validate([
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|email',
+            'table_id' => 'required|exists:tables,id',
+            'time_slot_id' => 'required|exists:time_slots,id',
+            'date' => 'required|date',
+        ]);
+
+        $booking->update([
+            'table_id' => $request->input('table_id'),
+            'time_slot_id' => $request->input('time_slot_id'),
+            'date' => $request->input('date'),
+        ]);
+
+        return redirect()->route('admin.booking')->with('success', 'Reservaton updated successfully');
+    }
+
     public function updateBookingStatus(Request $request, $id){
         $request->validate([
             'status' => 'required|in:pending,canceled,confirmed',

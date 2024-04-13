@@ -1,8 +1,7 @@
 
 @include('admin/bookings')
 
-<div class="mt-0" style="margin-left:20%; flex: 1;
-    padding: 16px;">
+<div class="booking mt-0" style="margin-left:18%; flex: 1;padding: 16px;">
     <h1 class="emp-text">User bookings</h1>
 
     @if(count($bookings) > 0)
@@ -17,6 +16,7 @@
                     <th>Time</th>
                     <th>Date</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +33,7 @@
                         <td>{{$booking->timeSlot->start_time}} - {{$booking->timeSlot->end_time}}</td> 
                         <td>{{$booking->date}}</td>
                         <td>
-                            <form action="{{ route('updateBookingStatus', $booking->id) }}" method="POST" id="statusForm_{{ $booking->id }}">
+                            <form action="{{ route('updateBookingStatus', $booking->id) }}" method="POST" id="statusForm_{{ $booking->id }}" style="margin:auto;">
                                 @csrf
                                 @method('PUT')
                                 <select name="status" onchange="updateBookingStatus(this.value, '{{ $booking->id }}')">
@@ -43,6 +43,16 @@
                                 </select>
                             </form>
                         </td>    
+                        <td>
+                            @if($booking->status === 'pending')
+                                <a href="{{ route('reschedule', $booking->id) }}">
+                                    <button class="reschedule-button">Reschedule</button>
+                                </a>
+                            @else
+                                <button disabled>Reschedule</button>
+                            @endif
+                        </td>
+
                     </tr>
                 @endforeach
             </tbody>
@@ -117,5 +127,20 @@ th {
     background-color: white;
     color: #4B49AC;
 }
+
+    .booking a {
+        width:100%;
+        margin:auto;
+        background-color: #4B49Ac;
+        border: 1px solid #4B49Ac;
+        padding: 10px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .booking a:hover {
+        background-color: #7978E9;
+    }
 
 </style>

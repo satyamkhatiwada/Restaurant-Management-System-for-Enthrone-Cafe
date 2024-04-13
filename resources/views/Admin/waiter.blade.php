@@ -54,8 +54,9 @@
     }
     
     .back img {
-        width: 50px;
+        width: 30px;
     }
+    
     
     .back span {
         margin-left: 5px; 

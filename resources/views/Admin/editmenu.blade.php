@@ -66,9 +66,8 @@
         align-items: center; /* Center items vertically */
         text-decoration: none; /* Remove underline from the link */
     }
-    
     .back img {
-        width: 50px;
+        width: 30px;
     }
     
     .back span {

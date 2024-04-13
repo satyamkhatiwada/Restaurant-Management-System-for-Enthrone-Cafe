@@ -1,7 +1,7 @@
 <div class="flex">
     @include('admin/adminNavbar')
     
-    <div class="content mt-16" style="margin-left: 20%;">
+    <div class="content mt-16" style="margin-left: 18%;">
         <div class="flex">
             <a href="{{ route('admin.booking') }}" class="tab-btn {{ request()->routeIs('admin.booking') ? 'active' : '' }}" data-tab="bookings">User Bookings</a>
             <a href="{{ route('admin.table') }}" class="tab-btn {{ request()->routeIs('admin.table') ? 'active' : '' }}" data-tab="tables">Tables</a>

@@ -1,7 +1,7 @@
 
 @include('admin/bookings')
 
-    <div class="mt-0" style="margin-left:20%; flex: 1; padding: 16px;">
+    <div class="mt-0" style="margin-left:18%; flex: 1; padding: 16px;">
         <h1 class="emp-text">Create Table</h1>
 
             <div class="card-body">

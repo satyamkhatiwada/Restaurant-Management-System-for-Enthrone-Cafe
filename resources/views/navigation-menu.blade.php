@@ -26,9 +26,7 @@
                             <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                                 Home
                             </x-nav-link>
-                            <x-nav-link href="{{ route('booking') }}" :active="request()->routeIs('booking')">
-                                Reservation
-                            </x-nav-link>
+                            
                         @else
                             <x-nav-link href="/" :active="request()->routeIs('home')">
                                 Home
@@ -36,6 +34,10 @@
                         @endif
                         <x-nav-link href="{{ route('menu') }}" :active="request()->routeIs('menu')">
                             Menu
+                        </x-nav-link>
+
+                        <x-nav-link href="{{ route('booking') }}" :active="request()->routeIs('booking')">
+                            Reservation
                         </x-nav-link>
 
                         <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">
@@ -65,16 +67,15 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
                 @if (Auth::user() && !auth('admin')->check() && !auth('waiter')->check())
-
                     <div class="ms-3 relative">
-                        <a href="{{ route('order.history') }}" :active="request()->routeIs('order.history')">
-                            <div class="relative" style="background-image: url('{{ asset('img/order.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 50px; height: 40px;">
+                        <a href="{{ route('order.history') }}" style="{{ request()->routeIs('order.history') ? 'border-bottom: 1px solid blue;' : '' }}">
+                            <div class="relative" style="background-image: url('{{ asset('img/order.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 40px; height: 40px;">
                             </div>
                         </a>
                     </div>
                     <div class="ms-3 relative">
-                        <a href="{{ route('cart.view') }}" :active="request()->routeIs('cart.view')">
-                            <div class="relative" style="background-image: url('{{ asset('img/cart.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 40px; height: 40px;">
+                        <a href="{{ route('cart.view') }}" style="{{ request()->routeIs('cart.view') ? 'color: red;' : '' }}">
+                            <div class="relative" style="background-image: url('{{ asset('img/cart.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 30px; height: 30px;">
                                 <!-- Calculate total quantities -->
                                 @php
                                     $cartItems = Auth::user()->cartItems;
@@ -87,8 +88,8 @@
                             </div>
                         </a>
                     </div>
-
                 @endif
+
 
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
@@ -144,7 +145,7 @@
                 @endif
 
                 <!-- Settings Dropdown -->
-                @if ((auth('admin')->check()) || (auth()->check()))
+                @if ((auth('admin')->check()) || (auth()->check())|| (auth('waiter')->check()) )
                 <div class="ms-3 relative">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
@@ -155,13 +156,20 @@
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                        {{ Auth::user()->name }}
+                                        
+                                        @if(Auth::user()->name)
+                                            {{ Auth::user()->name }}
+                                        @elseif(Auth::user()->code)
+                                            {{ Auth::user()->code }}
+                                        @endif
 
                                         <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                         </svg>
                                     </button>
+                                     
                                 </span>
+
                             @endif
                         </x-slot>
 

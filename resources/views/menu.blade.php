@@ -7,7 +7,7 @@
     @endif
 
     <div class="content">
-        <img src="img/menu.webp" style="width:100%; height: 45vh; object-fit: cover;  filter: brightness(50%); position: relative;">
+        <img src="{{asset('img/menu.webp')}}" style="width:100%; height: 45vh; object-fit: cover;  filter: brightness(50%); position: relative;">
         <h1 class="emp-text">Our Menu</h1>
         <div class="category-container">
             <a href="{{route('menu')}}" class="category-btn" data-category="all">All</a>
@@ -50,7 +50,7 @@
             @endforeach
         </div>
     </div>
-<!-- </div> -->
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {

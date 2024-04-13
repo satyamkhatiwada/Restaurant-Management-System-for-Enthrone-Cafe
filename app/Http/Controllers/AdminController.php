@@ -124,7 +124,23 @@ class AdminController extends Controller
         $totalEarnings = Order::sum('total_amount');
         $totalUsers = User::count();
         $totalEmployee = Waiter::count();
+        $Users = User::paginate(8);
 
-        return view('admin.admindashboard', compact('totalOrders', 'totalEarnings','totalUsers','totalEmployee'));
+        return view('admin.admindashboard', compact('totalOrders', 'totalEarnings','totalUsers','totalEmployee','Users'));
+    }
+
+    public function deleteUser($id){
+      
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('admin.admindashboard')->with('error', 'Menu item not found.');
+        }
+
+        // Delete the menu item from the database
+        $user->delete();
+
+        return redirect()->route('admin.admindashboard')->with('success', 'User deleted successfully');
+        
     }
 }

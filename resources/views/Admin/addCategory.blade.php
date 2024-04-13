@@ -50,11 +50,13 @@
                             <tr>
                                 <td>{{$sn++}}</td>
                                 <td>{{$categories->category}}</td>
-                                <td><form action="{{ route('deleteCategory', ['id' => $categories->id]) }}" method="post">
+                                <td>
+                                    <form action="{{ route('deleteCategory', ['id' => $categories->id]) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" id="delete-button" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
-                                    </form></td>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -80,7 +82,7 @@
     }
     
     .back img {
-        width: 50px;
+        width: 30px;
     }
     
     .back span {

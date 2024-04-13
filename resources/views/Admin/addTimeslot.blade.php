@@ -1,6 +1,6 @@
 
 @include('admin/bookings')
-    <div class="mt-0" style="margin-left:20%; flex: 1; padding: 16px;">
+    <div class="mt-0" style="margin-left:18%; flex: 1; padding: 16px;">
         <h1 class="emp-text">Create Timeslot</h1>
 
             <div class="card-body">
@@ -46,7 +46,8 @@
 
     #add-table {
         width:20%;
-        background-color: #04AA6D;
+        background-color: #7978E9;
+        border: 1px solid #7978E9;
         padding: 10px;
         border-radius: 10px;
         color: white;
@@ -54,13 +55,8 @@
     }
 
     #add-table:hover {
-        width:20%;
         background-color: white;
-        border: 1px solid #04AA6D;
-        padding: 10px;
-        border-radius: 10px;
         color: black;
-        cursor: pointer; /* Add a pointer cursor on hover */
     }
 
 </style>
