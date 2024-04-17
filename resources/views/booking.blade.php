@@ -5,6 +5,7 @@
   @else
     @include('guestdashboard')
   @endif
+  
     <div class="content mt-16">
         <h1 class="emp-text">Table reservation</h1>
         <div class="flex">

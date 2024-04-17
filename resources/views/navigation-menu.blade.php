@@ -83,7 +83,7 @@
                                 @endphp
                                 <!-- Display counter badge if total quantities is greater than 0 -->
                                 @if ($totalQuantities > 0)
-                                    <span class="absolute top-0 left-full -mt-1 ml-1 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">{{ $totalQuantities }}</span>
+                                    <span class="absolute top-0 left-half -mt-1 ml-1 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-white bg-red-600 rounded-full">{{ $totalQuantities }}</span>
                                 @endif
                             </div>
                         </a>

@@ -47,7 +47,7 @@
     </li><hr>
 
     <li class="mb-2">
-        <a href="#" class="{{ request()->routeIs('inventory') ? 'active' : '' }}" id="inventory-link">
+        <a href="{{ route('admin.inventory') }}" class="{{ request()->routeIs('admin.inventory') ? 'active' : '' }}" id="inventory-link">
             Inventory
         </a>
     </li><hr>

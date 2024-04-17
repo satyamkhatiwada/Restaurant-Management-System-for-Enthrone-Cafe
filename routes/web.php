@@ -12,9 +12,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WaiterAuthController;
 use App\Http\Controllers\WaiterOrderController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\InventoryController;
 
 
- 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -121,6 +121,17 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/reschedule/{i
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/table/{id}', [BookingController::class, 'deleteTable'])->name('deleteTable');
 Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/user/{id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
 Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/updateBookingStatus/{id}', [BookingController::class, 'updateBookingStatus'])->name('updateBookingStatus');
+Route::middleware(['auth:sanctum,admin', 'verified'])->delete('/admin/inventory/{id}', [InventoryController::class, 'deleteInventory'])->name('deleteInventory');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/inventory', [InventoryController::class, 'index'])->name('admin.inventory');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/inventory/add', [InventoryController::class, 'addInventory'])->name('addInventory');
+Route::middleware(['auth:sanctum,admin', 'verified'])->post('/admin/inventory/store', [InventoryController::class, 'storeInventory'])->name('storeInventory');
+Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/inventory/{id}/edit', [InventoryController::class, 'editInventory'])->name('editInventory');
+Route::middleware(['auth:sanctum,admin', 'verified'])->put('/admin/inventory/{id}', [InventoryController::class, 'updateInventory'])->name('updateInventory');
+
+
+
+
+
 
 
 
