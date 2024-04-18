@@ -6,7 +6,7 @@
 
     <!-- Custom Login Card Container -->
     <div class="absolute inset-0 flex items-center justify-center" style="margin-top: 60px;">
-        <div class="flex p-8 rounded-lg shadow-lg" style="width: 60%; height: 65%;">
+        <div class="flex p-5 rounded-lg shadow-lg" style="width: 60%; height: 70%;">
             <!-- Image and Form Container -->
             <div class="flex justify-between w-full">
                 <!-- Image Container -->
@@ -16,7 +16,7 @@
                 <!-- Form Container -->
                 <div style="flex: 1; padding: 30px; background: black; opacity: 0.65; display: flex; flex-direction: column; justify-content: center;">
                     <div name="logo">
-                        <!-- Your logo or branding here -->
+                        <!-- logo here -->
                         <img src="{{ asset('img/logo.png') }}" alt="Logo">
                     </div>
 
@@ -53,10 +53,11 @@
                             <a class="underline text-sm text-white hover:text-white-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
                                 {{ __('Not registered? Register Now') }}
                             </a>    
-
-                            <x-button class="ms-4">
+    
+                            <x-button class="ms-4" style="min-width: 90px;"> <!-- Ensured button width -->
                                 {{ __('Log in') }}
                             </x-button>
+                        </div>
                         </div>
                     </form>
                 </div>

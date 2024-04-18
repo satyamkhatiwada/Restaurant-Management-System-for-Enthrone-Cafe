@@ -6,7 +6,7 @@
 
     <!-- Custom Register Card Container -->
     <div class="absolute inset-0 flex items-center justify-center">
-        <div class="flex p-8 rounded-lg shadow-lg" style="width: 60%; height: 80%; margin-top: 60px;">
+        <div class="flex p-8 rounded-lg shadow-lg" style="width: 60%; height: 85%; margin-top: 60px;">
             <!-- Image and Form Container -->
             <div class="flex justify-between w-full">
                 <!-- Image Container -->
