@@ -30,7 +30,7 @@
                         @if(auth()->check())
                             <form action="{{ route('cart.add', ['menuItemId' => $menuItem->id]) }}" method="POST">
                                 @csrf
-                                <!-- Your form fields and submit button go here -->
+                                <!-- form fields and submit button go here -->
                                 <button type="submit">
                                     <a href="{{ route('cart.add', ['menuItemId' => $menuItem->id]) }}">
                                         <img src="img/plus.png" class="add-to-cart" alt="">

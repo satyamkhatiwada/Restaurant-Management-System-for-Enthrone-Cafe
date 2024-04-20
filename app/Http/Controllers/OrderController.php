@@ -18,7 +18,7 @@ use Cixware\Esewa\Config;
 class OrderController extends Controller
 {
     public function index(){
-        $orders = Order::paginate(8);
+        $orders = Order::orderBy('created_at', 'desc')->paginate(8);
         return view('admin.order', compact('orders'));
     }
 
@@ -136,8 +136,9 @@ class OrderController extends Controller
     }
 
     public function history(){
-        $orders = Order::where('user_id', auth()->id())->paginate(6);
+        $orders = Order::where('user_id', auth()->id())
+                       ->orderBy('created_at', 'desc')
+                       ->paginate(6);
         return view('history', compact('orders'));
-    }    
-
+    }
 }

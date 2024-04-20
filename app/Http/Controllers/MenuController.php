@@ -87,10 +87,16 @@ class MenuController extends Controller
 
         // Handle image upload if a new image is provided
         if ($request->hasFile('image')) {
-            // Add logic to upload and save the new image
+            // Delete the old image
+            Storage::disk('public')->delete($menuItem->image);
+        
+            // Store the new image correctly
             $imagePath = $request->file('image')->store('menu_images', 'public');
-            $menuItem->update(['image' => $imagePath]);
+            if ($imagePath) {
+                $menuItem->update(['image' => $imagePath]);
+            }
         }
+        
 
         return redirect()->route('admin.menu')->with('success', 'Menu item updated successfully');
     }

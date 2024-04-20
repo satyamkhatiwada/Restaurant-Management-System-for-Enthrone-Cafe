@@ -14,7 +14,7 @@
                         <th>S.N.</th>
                         <th>Table</th>
                         <th>Capacity</th>
-                        <th>Action</th> <!-- Add a column for actions (e.g., remove item) -->
+                        <th>Action</th> 
                     </tr>
                 </thead>
                 <tbody>

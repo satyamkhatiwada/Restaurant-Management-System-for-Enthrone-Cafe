@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image">Item Image:</label>
+                    <label for="image" >Item Image:</label>
                     <input type="file" id="image" name="image" class="form-control" accept="image/*" required>
                 </div>
 

@@ -24,6 +24,7 @@
                     <th>Phone</th>
                     <th style="width:11.11%;">Total (inclusive of delivery and tax)</th>
                     <th colspan="2" style="text-align: center;">Delivery Address</th>
+                    <th>Time</th>
                     <th>Payment Method</th>
                     <th>Status</th>
                 </tr>
@@ -50,6 +51,7 @@
                         <td>{{ $order->total_amount }}</td>
                         <td>{{ $order->delivery_address }}</td>
                         <td>{{ $order->landmark }}</td>
+                        <td>{{$order->created_at}}</td>
                         <td>
                             {{($order->payment_method)}}
                         </td>

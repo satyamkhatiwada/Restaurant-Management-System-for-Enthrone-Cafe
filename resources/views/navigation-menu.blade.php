@@ -5,7 +5,7 @@
             <div class="flex">
                 <div class="flex items-center"> 
                 <a>
-                    <img src="{{ asset('img/logo.png') }}" alt="Your Logo" class="h-12 w-auto" /> <!-- Adjust width and height as needed -->
+                    <img src="{{ asset('img/logo.png') }}" alt="Your Logo" class="h-13 w-28" /> <!-- Adjust width and height as needed -->
                 </a>
                 </div> 
     

@@ -66,9 +66,7 @@ class CartController extends Controller
         // Update the quantity based on the submitted form data
         $newQuantity = max(1, $request->input('quantity', 1));
         $cartItem->update(['quantity' => $newQuantity]);
-    
-        // Add any additional logic here
-    
+
         return redirect()->back()->with('success', 'Cart updated successfully.');
     }
 
@@ -85,9 +83,6 @@ class CartController extends Controller
         });
 
         $total_amount = $subtotal+$tax+$delivery;
-    
-        // You can add more logic to calculate tax, delivery charge, etc.
-    
         return view('order', compact('cartItems', 'total_amount', 'tax', 'delivery'));
     }
     

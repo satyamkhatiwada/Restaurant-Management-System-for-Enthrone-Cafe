@@ -1,3 +1,8 @@
+<script>
+    @if(session('success'))
+        alert('{{ session('success') }}');
+    @endif
+</script>
 <div class="" style="text-decoration: none;">
   @if (auth()->check())
     @include('user.dashboard')
