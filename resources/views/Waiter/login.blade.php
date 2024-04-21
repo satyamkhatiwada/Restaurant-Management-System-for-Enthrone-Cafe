@@ -1,3 +1,4 @@
+@if (!auth()->check())
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,3 +69,6 @@
 
     </body>
 </html>
+@else
+ @include('home')
+@endif
