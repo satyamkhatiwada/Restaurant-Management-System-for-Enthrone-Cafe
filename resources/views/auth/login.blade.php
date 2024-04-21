@@ -1,3 +1,4 @@
+@if (!auth()->check())
 <x-guest-layout>
     <!-- Background Image with Darker Blur -->
     <div class="relative min-h-screen bg-cover bg-top" style="background-image: url('{{ asset('img/res.jpg') }}'); filter: blur(2px);">
@@ -65,3 +66,6 @@
         </div>
     </div>
 </x-guest-layout>
+@else
+ @include('home')
+@endif

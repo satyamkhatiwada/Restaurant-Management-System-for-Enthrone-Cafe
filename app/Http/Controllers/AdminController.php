@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Sale;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\Http\Responses\LoginResponse;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
@@ -125,9 +127,24 @@ class AdminController extends Controller
         $totalUsers = User::count();
         $totalEmployee = Waiter::count();
         $Users = User::paginate(8);
+        // Prepare monthly sales data
+    $currentYear = Carbon::now()->year;
+    $monthlySales = Order::select(
+        DB::raw('sum(total_amount) as total'),
+        DB::raw('MONTH(created_at) as month')
+    )->whereYear('created_at', $currentYear)
+     ->groupBy('month')
+     ->orderBy('month', 'asc')
+     ->get()
+     ->mapWithKeys(function ($item) {
+        // Convert month number to month name
+        return [Carbon::createFromFormat('m', $item->month)->format('F') => $item->total];
+    });
 
-        return view('admin.admindashboard', compact('totalOrders', 'totalEarnings','totalUsers','totalEmployee','Users'));
-    }
+    return view('admin.admindashboard', compact('totalOrders', 'totalEarnings', 'totalUsers', 'totalEmployee', 'Users', 'monthlySales'));
+}
+
+    
 
     public function deleteUser($id){
       

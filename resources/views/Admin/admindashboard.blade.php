@@ -1,5 +1,7 @@
+@if (auth('admin')->check())
 <div class="flex">
     @include('admin.adminNavbar')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <div class="content mt-16" style="margin-left:18%; height:1000px;">
 
@@ -22,7 +24,9 @@
                 <h2 class="card-header">Total Employees: <span class="card-body">{{ $totalEmployee }}</span></h2>
             </div>
         </div>
-
+        <div>
+            <canvas id="monthlySalesChart" width="400" height="170"></canvas>
+        </div>
         <div class="users">
             <h1 class="emp-text">Users</h1>
 
@@ -73,8 +77,21 @@
         {{ $Users->links() }}
     </div>
 </div>
+@else
+    <div class="error-404">
+        <p>No data found.</p>
+    </div>
+@endif
+
 
 <style>
+    .error-404 {
+    text-align: center;
+    padding: 50px;
+    font-size: 24px;
+    color: #666;
+    }
+
     .flex {
         display: flex;
     }
@@ -144,3 +161,42 @@
         margin: auto;
     }
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('monthlySalesChart').getContext('2d');
+        var monthlySalesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($monthlySales->keys()) !!},
+                datasets: [{
+                    label: 'Total Sales',
+                    data: {!! json_encode($monthlySales->values()) !!},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>

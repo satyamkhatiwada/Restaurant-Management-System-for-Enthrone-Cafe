@@ -39,7 +39,7 @@ class BookingController extends Controller
         $booking->status = 'pending'; // You can set the status as needed
         $booking->save();
 
-        return redirect()->route('home')->with('success', 'Booking created successfully!');
+        return redirect()->back()->with('success', 'Booking created successfully!');
     }
 
     public function viewBooking(){
